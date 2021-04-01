@@ -495,7 +495,6 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
 
         Log.e("选中的", "name:" + list.get(0).getName() + "/1-Id:" + list.get(0).getItemId() + "/2-Id:" + list.get(0).getChildId());
         mFtbFilter.resetTab(1, mSinglePriceList, "总价");
-
     }
 
 
