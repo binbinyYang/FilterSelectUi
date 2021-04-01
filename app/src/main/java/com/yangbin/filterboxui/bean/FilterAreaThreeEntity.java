@@ -5,12 +5,9 @@ import com.yangbin.base.BaseFilterBean;
 import java.util.List;
 
 /**
- * @author luys
- * @describe 区域选择子Entity
- * @date 2018/5/15
- * @email samluys@foxmail.com
+ * @describe 区域选择子Entity  第三级页面的数据bean
  */
-public class FilterChildAreasEntity extends BaseFilterBean {
+public class FilterAreaThreeEntity extends BaseFilterBean {
 
     /**
      * 街道ID

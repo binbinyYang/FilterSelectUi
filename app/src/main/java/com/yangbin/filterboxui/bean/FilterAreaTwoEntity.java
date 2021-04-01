@@ -5,12 +5,9 @@ import com.yangbin.base.BaseFilterBean;
 import java.util.List;
 
 /**
- * @author luys
- * @describe 区域选择父Entity
- * @date 2018/5/15
- * @email samluys@foxmail.com
+ * @describe 区域选择子Entity 第二级页面的数据bean
  */
-public class FilterAreaEntity extends BaseFilterBean {
+public class FilterAreaTwoEntity extends BaseFilterBean {
 
     /**
      * 区域名称
@@ -27,7 +24,7 @@ public class FilterAreaEntity extends BaseFilterBean {
     /**
      * 二级分类数据
      */
-    private List<FilterChildAreasEntity> childAreas;
+    private List<FilterAreaThreeEntity> childAreas;
 
 
 
@@ -56,11 +53,11 @@ public class FilterAreaEntity extends BaseFilterBean {
         this.selected = selected;
     }
 
-    public List<FilterChildAreasEntity> getChildAreas() {
+    public List<FilterAreaThreeEntity> getChildAreas() {
         return childAreas;
     }
 
-    public void setChildAreas(List<FilterChildAreasEntity> childAreas) {
+    public void setChildAreas(List<FilterAreaThreeEntity> childAreas) {
         this.childAreas = childAreas;
     }
 

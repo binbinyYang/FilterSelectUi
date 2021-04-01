@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Xml;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,10 +12,10 @@ import com.yangbin.FilterTabConfig;
 import com.yangbin.base.BaseFilterBean;
 import com.yangbin.bean.FilterInfoBean;
 import com.yangbin.bean.FilterResultBean;
-import com.yangbin.filterboxui.bean.FilterAreaEntity;
-import com.yangbin.filterboxui.bean.FilterChildAreasEntity;
+import com.yangbin.filterboxui.bean.FilterAreaOneEntity;
+import com.yangbin.filterboxui.bean.FilterAreaThreeEntity;
+import com.yangbin.filterboxui.bean.FilterAreaTwoEntity;
 import com.yangbin.filterboxui.bean.FilterMulSelectEntity;
-import com.yangbin.filterboxui.bean.FilterOneEntity;
 import com.yangbin.filterboxui.bean.FilterSelectedEntity;
 import com.yangbin.listener.OnSelectResultListener;
 import com.yangbin.util.StatusBarHelper;
@@ -34,11 +33,16 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity  extends AppCompatActivity implements OnSelectResultListener {
-    FilterTabView ftb_filter;
-    List<BaseFilterBean> mAreaList = new ArrayList<>();
+/**
+ * 杨彬
+ * demo使用类。针对于使用筛选框库
+ */
+public class MainActivity extends AppCompatActivity implements OnSelectResultListener {
+    FilterTabView mFtbFilter;
+    List<BaseFilterBean> mAreaList = new ArrayList<>();//区域
     List<BaseFilterBean> mAllPriceList = new ArrayList<>();//总价
     List<BaseFilterBean> mSortList = new ArrayList<>();//排序
+    List<BaseFilterBean> mAreaSizeList = new ArrayList<>();//平数
     List<BaseFilterBean> mMoreList = new ArrayList<>();//更多
     List<BaseFilterBean> mSinglePriceList = new ArrayList<>();//单价
 
@@ -48,49 +52,64 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
         super.onCreate(savedInstanceState);
         StatusBarHelper.translucent(this);
         setContentView(R.layout.activity_main);
-
-
         try {
-            ftb_filter = findViewById(R.id.ftb_filter);
-            ftb_filter.setColorMain(getResources().getColor(R.color.color_FF6F00));
-            ftb_filter.removeViews();
+            initView();
+            initData();
 
 
-            setAreaData();
-            setAllPriceData();
-            setSinglePriceData();
-            setSortData();
-            setMoreData();
-
-            FilterInfoBean bean_area = new FilterInfoBean("区域", FilterTabConfig.FILTER_TYPE_AREA, mAreaList);
-            FilterInfoBean bean_price = new FilterInfoBean("总价", FilterTabConfig.FILTER_TYPE_PRICE_UPRIGHT, mAllPriceList);
-            FilterInfoBean bean_sort = new FilterInfoBean("排序", FilterTabConfig.FILTER_TYPE_SINGLE_SELECT_HAVA_PIC, mSortList);
-            FilterInfoBean bean_more = new FilterInfoBean("更多", FilterTabConfig.FILTER_TYPE_MUL_SELECT, mMoreList);
-            FilterInfoBean bean5 = new FilterInfoBean("坪数", FilterTabConfig.FILTER_TYPE_SINGLE_GIRD, mSortList);
-            FilterInfoBean bean6 = new FilterInfoBean("单价", FilterTabConfig.FILTER_TYPE_PRICE_HORIZONTAL, mSinglePriceList);
+            setFilterViewAndData();
 
 
-            ftb_filter.addFilterItem(bean_area.getTabName(), bean_area.getFilterData(), bean_area.getPopupType(), 0,false);
-            ftb_filter.addFilterItem(bean_price.getTabName(), bean_price.getFilterData(), bean_price.getPopupType(), 1,false);
-            ftb_filter.addFilterItem(bean_sort.getTabName(), bean_sort.getFilterData(), bean_sort.getPopupType(), 2,true);
-            ftb_filter.addFilterItem(bean_more.getTabName(), bean_more.getFilterData(), bean_more.getPopupType(), 3,false);
-            ftb_filter.addFilterItem(bean5.getTabName(), bean5.getFilterData(), bean5.getPopupType(), 4,false);
-            ftb_filter.addFilterItem(bean6.getTabName(), bean6.getFilterData(), bean6.getPopupType(), 5,false);
-
-            final TextView toolbar = findViewById(R.id.toolbar);
-            toolbar.post(new Runnable() {
-                @Override
-                public void run() {
-                    Log.e("LUYS", toolbar.getHeight() + ":::::");
-                }
-            });
-            ftb_filter.setOnSelectResultListener(this);
+            mFtbFilter.setOnSelectResultListener(this);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * 设置要初始化的筛选框跟数据
+     */
+    private void setFilterViewAndData() {
+        FilterInfoBean bean_area = new FilterInfoBean("区域", FilterTabConfig.FILTER_TYPE_AREA, mAreaList);
+        FilterInfoBean bean_price = new FilterInfoBean("总价", FilterTabConfig.FILTER_TYPE_PRICE_UPRIGHT, mAllPriceList);
+        FilterInfoBean bean_sort = new FilterInfoBean("排序", FilterTabConfig.FILTER_TYPE_SINGLE_SELECT_HAVA_PIC, mSortList);
+        FilterInfoBean bean_more = new FilterInfoBean("更多", FilterTabConfig.FILTER_TYPE_MUL_SELECT, mMoreList);
+        FilterInfoBean bean5 = new FilterInfoBean("坪数", FilterTabConfig.FILTER_TYPE_SINGLE_GIRD, mAreaSizeList);
+        FilterInfoBean bean6 = new FilterInfoBean("单价", FilterTabConfig.FILTER_TYPE_PRICE_HORIZONTAL, mSinglePriceList);
+
+        mFtbFilter.addFilterItem(bean_area.getTabName(), bean_area.getFilterData(), bean_area.getPopupType(), 0, false);
+        mFtbFilter.addFilterItem(bean_price.getTabName(), bean_price.getFilterData(), bean_price.getPopupType(), 1, false);
+        mFtbFilter.addFilterItem(bean_sort.getTabName(), bean_sort.getFilterData(), bean_sort.getPopupType(), 2, true);
+        mFtbFilter.addFilterItem(bean_more.getTabName(), bean_more.getFilterData(), bean_more.getPopupType(), 3, false);
+        mFtbFilter.addFilterItem(bean5.getTabName(), bean5.getFilterData(), bean5.getPopupType(), 4, false);
+        mFtbFilter.addFilterItem(bean6.getTabName(), bean6.getFilterData(), bean6.getPopupType(), 5, false);
+    }
+
+    /**
+     * 初始化view
+     */
+    private void initView() {
+        mFtbFilter = findViewById(R.id.ftb_filter);
+        mFtbFilter.setColorMain(getResources().getColor(R.color.color_FF6F00));
+        mFtbFilter.removeViews();
+    }
+
+    /**
+     * 初始化list有关data
+     */
+    private void initData() {
+
+        setAreaData();
+        setAllPriceData();
+        setSinglePriceData();
+        setSortData();
+        setMoreData();
+    }
+
+    /**
+     * 设置排序数据
+     */
     private void setSortData() {
         FilterSelectedEntity ff = new FilterSelectedEntity();
         ff.setTid(0);
@@ -136,12 +155,22 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
         mSortList.add(ff5);
         mSortList.add(ff6);
 
+
+        mAreaSizeList.add(ff);
+        mAreaSizeList.add(ff1);
+        mAreaSizeList.add(ff2);
+        mAreaSizeList.add(ff3);
+        mAreaSizeList.add(ff4);
+        mAreaSizeList.add(ff5);
+        mAreaSizeList.add(ff6);
+
     }
 
 
-
+    /**
+     * 设置更多数据
+     */
     private void setMoreData() {
-
         FilterMulSelectEntity filterOneEntity = new FilterMulSelectEntity();
         List<FilterSelectedEntity> list = new ArrayList<>();
         filterOneEntity.setIsCan(1);
@@ -213,7 +242,6 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
         list1.add(ff4);
 
 
-
 //---------------------------------------------
 
 
@@ -252,29 +280,25 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
         list2.add(fff4);
 
 
-
-
         mMoreList.add(filterOneEntity);
         mMoreList.add(filterOneEntity1);
         mMoreList.add(filterOneEntity2);
 
 
-
-
     }
-    private void setAllPriceData() {
 
+    /**
+     * 设置总价数据
+     */
+    private void setAllPriceData() {
         FilterSelectedEntity filterSelectedEntity = new FilterSelectedEntity();
         filterSelectedEntity.setTid(0);
         filterSelectedEntity.setName("不限");
         filterSelectedEntity.setSelecteStatus(1);
-
-
         FilterSelectedEntity filterSelectedEntity1 = new FilterSelectedEntity();
         filterSelectedEntity1.setTid(1);
         filterSelectedEntity1.setName("100");
         filterSelectedEntity1.setSelecteStatus(0);
-
 
         FilterSelectedEntity filterSelectedEntity2 = new FilterSelectedEntity();
         filterSelectedEntity2.setTid(2);
@@ -311,9 +335,10 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
     }
 
 
-
+    /**
+     * 设置单价数据
+     */
     private void setSinglePriceData() {
-
         FilterSelectedEntity filterSelectedEntity = new FilterSelectedEntity();
         filterSelectedEntity.setTid(0);
         filterSelectedEntity.setName("不限");
@@ -359,21 +384,24 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
         mSinglePriceList.add(filterSelectedEntity6);
     }
 
+    /**
+     * 设置区域筛选框里面的数据list
+     */
     private void setAreaData() {
         try {
-            FilterOneEntity filterOneEntity = new FilterOneEntity();
+            FilterAreaOneEntity filterOneEntity = new FilterAreaOneEntity();
             filterOneEntity.setArea_id(0);
             filterOneEntity.setName("区域0");
             filterOneEntity.setSelected(1);
             filterOneEntity.setFilterAreaEntityList(loadAreaData());
 
-            FilterOneEntity filterOneEntity2 = new FilterOneEntity();
+            FilterAreaOneEntity filterOneEntity2 = new FilterAreaOneEntity();
             filterOneEntity2.setArea_id(1);
             filterOneEntity2.setName("捷运1");
             filterOneEntity2.setSelected(0);
             filterOneEntity2.setFilterAreaEntityList(loadSubWayData());
 
-            FilterOneEntity filterOneEntity3 = new FilterOneEntity();
+            FilterAreaOneEntity filterOneEntity3 = new FilterAreaOneEntity();
             filterOneEntity3.setArea_id(2);
             filterOneEntity3.setName("附近2");
             filterOneEntity3.setSelected(0);
@@ -388,10 +416,42 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
         }
     }
 
+    /**
+     * 设置附近数据集合
+     *
+     * @return
+     */
+    public List<FilterAreaTwoEntity> loadNearData() {
+        List<FilterAreaTwoEntity> areaList = new ArrayList<>();
+        FilterAreaTwoEntity area = new FilterAreaTwoEntity();
+        area.setArea_id(0);
+        area.setName("1000");
+        area.setSelected(0);
 
+        FilterAreaTwoEntity area1 = new FilterAreaTwoEntity();
+        area1.setArea_id(1);
+        area1.setName("2000");
+        area1.setSelected(0);
+
+        FilterAreaTwoEntity area2 = new FilterAreaTwoEntity();
+        area2.setArea_id(2);
+        area2.setName("3000");
+        area2.setSelected(0);
+
+        areaList.add(area);
+        areaList.add(area1);
+        areaList.add(area2);
+        return areaList;
+    }
+
+    /**
+     * 返回数据（单bean）
+     *
+     * @param resultBean 单个筛选的数据集合
+     * @param postion    postion对应是第几个筛选框的数据（比如是区域，还是单价）
+     */
     @Override
     public void onSelectResult(FilterResultBean resultBean, int postion) {
-
         String message = "";
         if (resultBean.getPopupType() == 3) {
             List<FilterResultBean.MulTypeBean> list = resultBean.getSelectList();
@@ -411,6 +471,13 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
 
     }
 
+
+    /**
+     * 返回数据（List集合bean）
+     *
+     * @param resultBeans List集合bean，多选
+     * @param postion     postion对应是第几个筛选框的数据（比如是区域，还是单价）
+     */
     @Override
     public void onSelectResultList(List<FilterResultBean> resultBeans, int postion) {
         String message = "";
@@ -425,41 +492,23 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
         }
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
-        Log.e("选中的","name:"+list.get(0).getName() +"/1-Id:"+list.get(0).getItemId()+"/2-Id:"+list.get(0).getChildId());
-      ftb_filter.resetTab(1, mSinglePriceList, "总价");
+        Log.e("选中的", "name:" + list.get(0).getName() + "/1-Id:" + list.get(0).getItemId() + "/2-Id:" + list.get(0).getChildId());
+        mFtbFilter.resetTab(1, mSinglePriceList, "总价");
 
     }
 
 
-    public List<FilterAreaEntity> loadNearData() {
-        List<FilterAreaEntity> areaList = new ArrayList<>();
-        FilterAreaEntity area = new FilterAreaEntity();
-        area.setArea_id(0);
-        area.setName("1000");
-        area.setSelected(0);
-
-        FilterAreaEntity area1 = new FilterAreaEntity();
-        area1.setArea_id(1);
-        area1.setName("2000");
-        area1.setSelected(0);
-
-        FilterAreaEntity area2 = new FilterAreaEntity();
-        area2.setArea_id(2);
-        area2.setName("3000");
-        area2.setSelected(0);
-
-        areaList.add(area);
-        areaList.add(area1);
-        areaList.add(area2);
-        return areaList;
-    }
-
-    public List<FilterAreaEntity> loadAreaData() {
-        List<FilterAreaEntity> areaList = new ArrayList<>();
-        FilterAreaEntity area = null;
-        FilterChildAreasEntity district;
-        List<FilterChildAreasEntity> districtList = null;
-        area = new FilterAreaEntity();
+    /**
+     * 设置区域数据集合
+     *
+     * @return
+     */
+    public List<FilterAreaTwoEntity> loadAreaData() {
+        List<FilterAreaTwoEntity> areaList = new ArrayList<>();
+        FilterAreaTwoEntity area = null;
+        FilterAreaThreeEntity district;
+        List<FilterAreaThreeEntity> districtList = null;
+        area = new FilterAreaTwoEntity();
         area.setArea_id(0);
         area.setName("不限");
         area.setSelected(1);
@@ -478,7 +527,7 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
                     case XmlPullParser.START_TAG:
                         String tagName = parser.getName();
                         if ("region".equals(tagName)) {
-                            area = new FilterAreaEntity();
+                            area = new FilterAreaTwoEntity();
 
 
                             String id = parser.getAttributeValue(null, "id");
@@ -491,7 +540,7 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
                             districtList = new ArrayList<>();
                             area.setChildAreas(districtList);
 
-                            district = new FilterChildAreasEntity();
+                            district = new FilterAreaThreeEntity();
                             district.setStreet_id(0);
                             district.setName("不限");
                             district.setSelected(0);
@@ -502,7 +551,7 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
                             String name = parser.nextText();
                             String latitude = parser.getAttributeValue(null, "lat");
                             String longitude = parser.getAttributeValue(null, "lng");
-                            district = new FilterChildAreasEntity();
+                            district = new FilterAreaThreeEntity();
                             int initID = Integer.parseInt(id);
                             district.setStreet_id(initID);
                             district.setName(name);
@@ -530,11 +579,18 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
     }
 
 
-    public List<FilterAreaEntity> loadSubWayData() throws IOException, XmlPullParserException {
-        List<FilterAreaEntity> praser1 = realPraserLine2(MainActivity.this, R.raw.subway_taipei);
-        List<FilterAreaEntity> praser2 = realPraserLine2(MainActivity.this, R.raw.subway_gaoxiong);
-        List<FilterAreaEntity> praser3 = realPraserLine2(MainActivity.this, R.raw.subway_taoyuan);
-        List<FilterAreaEntity> praser4 = realPraserLine2(MainActivity.this, R.raw.subway_xinbei);
+    /**
+     * 将3种地区捷运数据合并成一个list
+     *
+     * @return
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
+    public List<FilterAreaTwoEntity> loadSubWayData() throws IOException, XmlPullParserException {
+        List<FilterAreaTwoEntity> praser1 = realPraserLine2(MainActivity.this, R.raw.subway_taipei);
+        List<FilterAreaTwoEntity> praser2 = realPraserLine2(MainActivity.this, R.raw.subway_gaoxiong);
+        List<FilterAreaTwoEntity> praser3 = realPraserLine2(MainActivity.this, R.raw.subway_taoyuan);
+        List<FilterAreaTwoEntity> praser4 = realPraserLine2(MainActivity.this, R.raw.subway_xinbei);
         praser1.addAll(praser2);
         praser1.addAll(praser3);
         praser1.addAll(praser4);
@@ -543,13 +599,19 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
 
     }
 
+    /**
+     * 设置捷运数据集合
+     *
+     * @return
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
+    public List<FilterAreaTwoEntity> realPraserLine2(Context context, int resourceId) throws XmlPullParserException, IOException {
+        List<FilterAreaTwoEntity> areaList = new ArrayList<>();
 
-    public List<FilterAreaEntity> realPraserLine2(Context context, int resourceId) throws XmlPullParserException, IOException {
-        List<FilterAreaEntity> areaList = new ArrayList<>();
-
-        FilterAreaEntity area = null;
-        FilterChildAreasEntity district;
-        List<FilterChildAreasEntity> districtList = null;
+        FilterAreaTwoEntity area = null;
+        FilterAreaThreeEntity district;
+        List<FilterAreaThreeEntity> districtList = null;
         InputStream inStream = context.getResources().openRawResource(resourceId);
         XmlPullParser pullParser = Xml.newPullParser();
         pullParser.setInput(inStream, "UTF-8");
@@ -560,7 +622,7 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
                     break;
                 case XmlPullParser.START_TAG:
                     if ("line".equals(pullParser.getName())) {
-                        area = new FilterAreaEntity();
+                        area = new FilterAreaTwoEntity();
                         String name = pullParser.getAttributeValue(null, "name");
                         String id = pullParser.getAttributeValue(null, "id");
                         String latitude = pullParser.getAttributeValue(null, "lat");
@@ -571,7 +633,7 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
                         area.setName(name);
                         districtList = new ArrayList<>();
                         area.setChildAreas(districtList);
-                        district = new FilterChildAreasEntity();
+                        district = new FilterAreaThreeEntity();
                         district.setStreet_id(0);
                         district.setName("不限");
                         district.setSelected(0);
@@ -584,7 +646,7 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
                         String latitude = pullParser.getAttributeValue(null, "lat");
                         String longitude = pullParser.getAttributeValue(null, "lng");
                         String zoom = pullParser.getAttributeValue(null, "zoom");
-                        district = new FilterChildAreasEntity();
+                        district = new FilterAreaThreeEntity();
                         int initID = Integer.parseInt(id);
                         district.setStreet_id(initID);
                         district.setName(name);
@@ -610,6 +672,9 @@ public class MainActivity  extends AppCompatActivity implements OnSelectResultLi
     }
 
 
+    /**
+     * 集合的复制   作用：防止adapter清空数据的时候 集合数据也被清空
+     */
     public static <E> List<E> deepCopy(List<E> src) {
         try {
             ByteArrayOutputStream byteOut = new ByteArrayOutputStream();

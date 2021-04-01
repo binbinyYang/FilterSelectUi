@@ -5,12 +5,9 @@ import com.yangbin.base.BaseFilterBean;
 import java.util.List;
 
 /**
- * @author luys
- * @describe 区域选择父Entity
- * @date 2018/5/15
- * @email samluys@foxmail.com
+ * @describe 区域选择父Entity （三级联动的父entity)第一级页面的数据bean
  */
-public class FilterOneEntity extends BaseFilterBean {
+public class FilterAreaOneEntity extends BaseFilterBean {
 
     /**
      * 区域名称
@@ -27,7 +24,7 @@ public class FilterOneEntity extends BaseFilterBean {
     /**
      * 二级分类数据
      */
-    private List<FilterAreaEntity> filterAreaEntityList;
+    private List<FilterAreaTwoEntity> filterAreaTwoEntityList;
 
 
 
@@ -56,12 +53,12 @@ public class FilterOneEntity extends BaseFilterBean {
         this.selected = selected;
     }
 
-    public List<FilterAreaEntity> getFilterAreaEntityList() {
-        return filterAreaEntityList;
+    public List<FilterAreaTwoEntity> getFilterAreaEntityList() {
+        return filterAreaTwoEntityList;
     }
 
-    public void setFilterAreaEntityList(List<FilterAreaEntity> filterAreaEntityList) {
-        this.filterAreaEntityList = filterAreaEntityList;
+    public void setFilterAreaEntityList(List<FilterAreaTwoEntity> filterAreaTwoEntityList) {
+        this.filterAreaTwoEntityList = filterAreaTwoEntityList;
     }
 
     @Override
@@ -92,7 +89,7 @@ public class FilterOneEntity extends BaseFilterBean {
 
     @Override
     public List getChildList() {
-        return  filterAreaEntityList;
+        return filterAreaTwoEntityList;
     }
 
     @Override

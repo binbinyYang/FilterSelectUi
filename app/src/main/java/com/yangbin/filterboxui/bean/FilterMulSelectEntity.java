@@ -6,10 +6,7 @@ import com.yangbin.base.BaseFilterBean;
 import java.util.List;
 
 /**
- * @author luys
  * @describe 筛选多选Entity
- * @date 2018/5/15
- * @email samluys@foxmail.com
  */
 public class FilterMulSelectEntity extends BaseFilterBean {
 
