@@ -11,8 +11,8 @@ import android.widget.Button;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.yangbin.adapter.AreaThreeAdapter;
 import com.yangbin.adapter.AreaParentAdapter;
+import com.yangbin.adapter.AreaThreeAdapter;
 import com.yangbin.adapter.AreaTwoAdapter;
 import com.yangbin.base.BaseFilterBean;
 import com.yangbin.base.BasePopupWindow;
@@ -21,6 +21,7 @@ import com.yangbin.lib_filtertab.R;
 import com.yangbin.listener.OnAdapterRefreshListener;
 import com.yangbin.listener.OnFilterToViewListener;
 import com.yangbin.view.FilterTabView;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -227,7 +228,7 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
                 if (isShowing()) {
                     dismiss();
 
-                    if(oneList!=null) {
+                    if (oneList != null) {
                         List<BaseFilterBean> list = new ArrayList<>();
                         list.addAll(deepCopy(oneList));
                         mParentAdapter.addData(list);
@@ -241,17 +242,17 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
                         mCurrentClickParentBean = oneList.get(sureOnePosition);
                         mCurrentClickParentPosition = sureOnePosition;
                         mCurrentTwoClickParentPosition = sureTwoPosition;
-                    }else {
+                    } else {
                         List<BaseFilterBean> list = new ArrayList<>();
                         list.addAll(deepCopy(initList));
                         mParentAdapter.addData(list);
 
-                        mTwoParentAdapter.addData(  initList.get(mCurrentClickParentPosition).getChildList());
+                        mTwoParentAdapter.addData(initList.get(mCurrentClickParentPosition).getChildList());
                         BaseFilterBean b = (BaseFilterBean) initList.get(mCurrentClickParentPosition).getChildList().get(0);
-                        if(b.getChildList()!=null) {
+                        if (b.getChildList() != null) {
                             mChildAdapter.addData((List<BaseFilterBean>) b.getChildList());
-                        }else {
-                            mChildAdapter.addData( new ArrayList<BaseFilterBean>());
+                        } else {
+                            mChildAdapter.addData(new ArrayList<BaseFilterBean>());
                         }
                         mParentAdapter.notifyDataSetChanged();
                         mTwoParentAdapter.notifyDataSetChanged();
@@ -284,7 +285,7 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
             public void onItemClick(int position) {
                 try {
                     mCurrentClickParentBean = mParentList.get(position);
-                    mCurrentTwoClickParentBean= mParentList.get(position) ;
+                    mCurrentTwoClickParentBean = mParentList.get(position);
                     mCurrentClickParentPosition = position;
                     List<BaseFilterBean> childList = mCurrentClickParentBean.getChildList();
                     if (childList != null && childList.size() > 0) {
@@ -297,9 +298,10 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
                     // -1 即为点击“不限”
                     if (mCurrentClickParentBean.getId() == -1) {
                         FilterResultBean resultBean = new FilterResultBean();
-                        resultBean.setPopupType(mCurrentClickParentPosition);
+                        resultBean.setPopupType(getFilterType());
                         resultBean.setPopupIndex(getPosition());
-                        getOnFilterToViewListener().onFilterToView(resultBean,mTabPostion);
+                        resultBean.setParentIndex(mCurrentClickParentPosition);
+                        getOnFilterToViewListener().onFilterToView(resultBean, mTabPostion);
                         dismiss();
                     }
                 } catch (Exception e) {
@@ -320,14 +322,15 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
                     } else {
 
 
-                        if (position == 0&&mCurrentClickParentPosition==0) {
+                        if (position == 0 && mCurrentClickParentPosition == 0) {
                             rv_child.setVisibility(View.GONE);
                             mCurrentTwoClickParentBean = (BaseFilterBean) mParentList.get(mCurrentClickParentPosition).getChildList().get(position);
                             mCurrentTwoClickParentPosition = position;
 
                             FilterResultBean resultBean = new FilterResultBean();
-                            resultBean.setPopupType(mCurrentClickParentPosition);
+                            resultBean.setPopupType(getFilterType());
                             resultBean.setPopupIndex(getPosition());
+                            resultBean.setParentIndex(mCurrentClickParentPosition);
                         } else {
                             mCurrentTwoClickParentBean = (BaseFilterBean) mParentList.get(mCurrentClickParentPosition).getChildList().get(position);
                             mCurrentTwoClickParentPosition = position;
@@ -354,7 +357,6 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
                 }
             }
         });
-
 
 
         mChildAdapter.setOnItemClickListener(new AreaThreeAdapter.OnItemClickListener() {
@@ -390,7 +392,6 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
         });
 
 
-
     }
 
     @Override
@@ -412,9 +413,10 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
             if (mCurrentClickParentPosition == 2) {
                 FilterResultBean resultBean = new FilterResultBean();
                 resultBean.setItemId(mCurrentTwoClickParentBean.getId());
-                resultBean.setPopupType(mCurrentClickParentPosition);
+                resultBean.setPopupType(getFilterType());
                 resultBean.setChildId(mCurrentClickParentBean.getId());
                 resultBean.setPopupIndex(getPosition());
+                resultBean.setParentIndex(mCurrentClickParentPosition);
                 resultBean.setName(mCurrentTwoClickParentBean.getItemName());
 
 
@@ -438,16 +440,22 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
                 rv_child.setVisibility(View.GONE);
 
 
-                getOnFilterToViewListener().onFilterToView(resultBean,mTabPostion);
+                getOnFilterToViewListener().onFilterToView(resultBean, mTabPostion);
             } else {
                 if (mCurrentTwoClickParentPosition == 0 && mCurrentClickParentPosition == 0) {
                     List<FilterResultBean> resultBeansList = new ArrayList<>();
                     FilterResultBean resultBean = new FilterResultBean();
                     resultBean.setItemId(0);
-                    resultBean.setPopupType(mCurrentClickParentPosition);
+                    resultBean.setPopupType(getFilterType());
                     resultBean.setChildId(0);
                     resultBean.setPopupIndex(getPosition());
-                    resultBean.setName(mCurrentTwoClickParentBean.getItemName()   );
+                    resultBean.setParentIndex(mCurrentClickParentPosition);
+                    if (mCurrentTwoClickParentPosition == 0) {
+                        BaseFilterBean baseFilterBean = (BaseFilterBean) mCurrentClickParentBean.getChildList().get(mCurrentClickParentPosition);
+                        resultBean.setName(baseFilterBean.getItemName());
+                    } else {
+                        resultBean.setName(mCurrentTwoClickParentBean.getItemName());
+                    }
                     resultBeansList.add(resultBean);
 
 
@@ -469,8 +477,8 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
                     threeList = new ArrayList<>();
                     threeList.addAll(threeList);
                     rv_child.setVisibility(View.GONE);
-                    getOnFilterToViewListener().onFilterListToView(resultBeansList,mTabPostion);
-                } else {
+                    getOnFilterToViewListener().onFilterListToView(resultBeansList, mTabPostion);
+                } else {//不限
                     List<BaseFilterBean> childList = mCurrentTwoClickParentBean.getChildList();
                     List<FilterResultBean> resultBeansList = new ArrayList<>();
                     mSureOneBean = mCurrentClickParentBean;
@@ -496,14 +504,20 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
                         if (childList.get(i).getSelecteStatus() == 1) {
                             FilterResultBean resultBean = new FilterResultBean();
                             resultBean.setItemId(mCurrentTwoClickParentBean.getId());
-                            resultBean.setPopupType(mCurrentClickParentPosition);
+                            resultBean.setPopupType(getFilterType());
                             resultBean.setChildId(childList.get(i).getId());
                             resultBean.setPopupIndex(getPosition());
-                            resultBean.setName(childList.get(i).getItemName());
+                            resultBean.setParentIndex(mCurrentClickParentPosition);
+                            if (childList.get(i).getItemName().equals("不限")) {
+                                resultBean.setName(mCurrentTwoClickParentBean.getItemName());
+                            } else {
+                                resultBean.setName(childList.get(i).getItemName());
+                            }
+
                             resultBeansList.add(resultBean);
                         }
                     }
-                    getOnFilterToViewListener().onFilterListToView(resultBeansList,mTabPostion);
+                    getOnFilterToViewListener().onFilterListToView(resultBeansList, mTabPostion);
                 }
             }
             dismiss();

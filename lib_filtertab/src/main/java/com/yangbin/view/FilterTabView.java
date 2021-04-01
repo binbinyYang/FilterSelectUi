@@ -437,9 +437,15 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
                 mPopupWs.get(currentIndex).dismiss();
             } else {
 
-                if (((Activity) mContext) != null && !((Activity) mContext).isFinishing()) {
+                try {
+
+
+                if ( !((Activity) mContext).isFinishing()) {
                     Log.e("=========", "崩溃了");
                     mPopupWs.get(currentIndex).show(this);
+                }
+            }catch (Exception e){
+
                 }
             }
         }
@@ -624,36 +630,70 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
 
     @Override
     public void onFilterListToView(List<FilterResultBean> resultBeans, int postion) {
-
-        int popupIndex = resultBeans.get(0).getPopupIndex();
-        String itemName = "";
-        if (resultBeans.size() == 1 && resultBeans.get(0).getItemId() == -1) {
-            // 不限
-            // itemId = -1 即为点击“不限” FilterTabView名称不变
-            mTextViewLists.get(popupIndex).setText(mTextContents.get(popupIndex));
-        } else {
-            for (int i = 0; i < resultBeans.size(); i++) {
-                FilterResultBean resultBean = resultBeans.get(i);
-                if (i == resultBeans.size() - 1) {
-                    itemName = itemName + resultBean.getName();
-                } else {
-                    itemName = itemName + resultBean.getName() + ",";
-
-                }
-            }
-
-            List<FilterResultBean> selectList = resultBeans;
-            if (selectList.size() == 1) {
-                mTextViewLists.get(popupIndex).setText(itemName);
-                mTextViewLists.get(popupIndex).setTextColor(getResources().getColor(R.color.color_ff8800));
+        if (resultBeans.get(0).getPopupType() == FilterTabConfig.FILTER_TYPE_AREA||resultBeans.get(0).getPopupType() == FilterTabConfig.FILTER_TYPE_SINGLE_GIRD||resultBeans.get(0).getPopupType() == FilterTabConfig.FILTER_TYPE_PRICE_HORIZONTAL) {
+            int popupIndex = resultBeans.get(0).getPopupIndex();
+            String itemName = "";
+            if (resultBeans.size() == 1 && resultBeans.get(0).getItemId() == 0) {
+                // 不限
+                // itemId = -1 即为点击“不限” FilterTabView名称不变
+                mTextViewLists.get(popupIndex).setText(mTextContents.get(popupIndex));
+                mTextViewLists.get(popupIndex).setTextColor(getResources().getColor(R.color.black));
             } else {
-                mTextViewLists.get(popupIndex).setText(mTextContents.get(popupIndex) + "(" + selectList.size() + ")");
-                mTextViewLists.get(popupIndex).setTextColor(getResources().getColor(R.color.color_ff8800));
+                for (int i = 0; i < resultBeans.size(); i++) {
+                    FilterResultBean resultBean = resultBeans.get(i);
+                    if (i == resultBeans.size() - 1) {
+                        itemName = itemName + resultBean.getName();
+                    } else {
+                        itemName = itemName + resultBean.getName() + ",";
+
+                    }
+                }
+
+                List<FilterResultBean> selectList = resultBeans;
+                if (selectList.size() == 1) {
+                    mTextViewLists.get(popupIndex).setText(itemName);
+                    mTextViewLists.get(popupIndex).setTextColor(getResources().getColor(R.color.color_ff8800));
+                } else {
+                    mTextViewLists.get(popupIndex).setText(mTextContents.get(popupIndex) + "(" + selectList.size() + ")");
+                    mTextViewLists.get(popupIndex).setTextColor(getResources().getColor(R.color.color_ff8800));
+                }
+
             }
+            mHasSelected.put(popupIndex, resultBeans);
+            onSelectResultListener.onSelectResultList(resultBeans, postion);
+        }else {
+
+
+            int popupIndex = resultBeans.get(0).getPopupIndex();
+            String itemName = "";
+            if (resultBeans.size() == 1 && resultBeans.get(0).getItemId() == -1) {
+                // 不限
+                // itemId = -1 即为点击“不限” FilterTabView名称不变
+                mTextViewLists.get(popupIndex).setText(mTextContents.get(popupIndex));
+            } else {
+                for (int i = 0; i < resultBeans.size(); i++) {
+                    FilterResultBean resultBean = resultBeans.get(i);
+                    if (i == resultBeans.size() - 1) {
+                        itemName = itemName + resultBean.getName();
+                    } else {
+                        itemName = itemName + resultBean.getName() + ",";
+
+                    }
+                }
+
+                List<FilterResultBean> selectList = resultBeans;
+                if (selectList.size() == 1) {
+                    mTextViewLists.get(popupIndex).setText(itemName);
+                    mTextViewLists.get(popupIndex).setTextColor(getResources().getColor(R.color.color_ff8800));
+                } else {
+                    mTextViewLists.get(popupIndex).setText(mTextContents.get(popupIndex) + "(" + selectList.size() + ")");
+                    mTextViewLists.get(popupIndex).setTextColor(getResources().getColor(R.color.color_ff8800));
+                }
 //            mTextViewLists.get(popupIndex).setText(itemName);
+            }
+            mHasSelected.put(popupIndex, resultBeans);
+            onSelectResultListener.onSelectResultList(resultBeans, postion);
         }
-        mHasSelected.put(popupIndex, resultBeans);
-        onSelectResultListener.onSelectResultList(resultBeans, postion);
     }
 
     /**

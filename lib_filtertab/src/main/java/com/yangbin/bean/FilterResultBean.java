@@ -5,6 +5,12 @@ import java.util.List;
 
 public class FilterResultBean {
 
+
+    /**
+     * 三级联动会用到这个字段
+     * 记录最外层联动是选的 区域 还是捷运 还是附近    0 1 2
+     */
+    private int parentIndex;
     /**
      * Popupwindow布局位置
      */
@@ -29,6 +35,15 @@ public class FilterResultBean {
      * 返回的筛选名称
      */
     private String name;
+
+
+    public int getParentIndex() {
+        return parentIndex;
+    }
+
+    public void setParentIndex(int parentIndex) {
+        this.parentIndex = parentIndex;
+    }
 
     /**
      * 多选返回结果
