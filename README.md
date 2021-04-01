@@ -84,10 +84,8 @@ javabean 要继承 BaseFilterBean，重写里面的方法
  ftb_filter.removeViews();
   
 ```
- 拿到选择后对应的Tab名称
+  OnSelectFilterNameListener 实现这个接口可以拿到选择后对应的Tab名称
 ```java
- ftb_filter.removeViews();
- OnSelectFilterNameListener 实现这个接口可以拿到选择后对应的Tab名称
  ftb_filter.setOnSelectFilterNameListener(new OnSelectFilterNameListener() {
     @Override
     public void onSelectFilterName(String name, int popupindex) {
