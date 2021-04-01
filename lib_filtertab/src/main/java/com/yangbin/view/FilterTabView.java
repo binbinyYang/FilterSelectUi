@@ -749,10 +749,17 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
     }
 
 
-    public void resetTab(int currentIndex, List<BaseFilterBean> resultBeans, String title) {
+    public void resetTab(int currentIndex, List<BaseFilterBean> resultBeans, String title ) {
         List<BaseFilterBean> datas = mDataList.get(currentIndex);
         datas.clear();
         datas.addAll(resultBeans);
         mTextViewLists.get(currentIndex).setText(title);
+        mTextViewLists.get(currentIndex).setText(mTextContents.get(currentIndex));
+        mTextViewLists.get(currentIndex).setTextColor(getResources().getColor(R.color.black));
     }
+
+
+
+
+
 }
