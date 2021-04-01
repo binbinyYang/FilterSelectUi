@@ -38,13 +38,13 @@ import java.util.List;
  * demo使用类。针对于使用筛选框库
  */
 public class MainActivity extends AppCompatActivity implements OnSelectResultListener {
-    FilterTabView mFtbFilter;
-    List<BaseFilterBean> mAreaList = new ArrayList<>();//区域
-    List<BaseFilterBean> mAllPriceList = new ArrayList<>();//总价
-    List<BaseFilterBean> mSortList = new ArrayList<>();//排序
-    List<BaseFilterBean> mAreaSizeList = new ArrayList<>();//平数
-    List<BaseFilterBean> mMoreList = new ArrayList<>();//更多
-    List<BaseFilterBean> mSinglePriceList = new ArrayList<>();//单价
+    private FilterTabView mFtbFilter;
+    private List<BaseFilterBean> mAreaList = new ArrayList<>();//区域
+    private List<BaseFilterBean> mAllPriceList = new ArrayList<>();//总价
+    private List<BaseFilterBean> mSortList = new ArrayList<>();//排序
+    private List<BaseFilterBean> mAreaSizeList = new ArrayList<>();//平数
+    private List<BaseFilterBean> mMoreList = new ArrayList<>();//更多
+    private List<BaseFilterBean> mSinglePriceList = new ArrayList<>();//单价
 
 
     @Override
@@ -111,58 +111,57 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
      * 设置排序数据
      */
     private void setSortData() {
-        FilterSelectedEntity ff = new FilterSelectedEntity();
-        ff.setTid(0);
-        ff.setName("不限");
-        ff.setSelected(1);
+        FilterSelectedEntity sortBean_a = new FilterSelectedEntity();
+        sortBean_a.setTid(0);
+        sortBean_a.setName("不限");
+        sortBean_a.setSelected(1);
 
-        FilterSelectedEntity ff1 = new FilterSelectedEntity();
-        ff1.setTid(1);
-        ff1.setName("价格从低到高");
-        ff1.setSelected(0);
+        FilterSelectedEntity sortBean_b = new FilterSelectedEntity();
+        sortBean_b.setTid(1);
+        sortBean_b.setName("价格从低到高");
+        sortBean_b.setSelected(0);
 
-        FilterSelectedEntity ff2 = new FilterSelectedEntity();
-        ff2.setTid(2);
-        ff2.setName("价格从高到低");
-        ff2.setSelected(0);
+        FilterSelectedEntity sortBean_c = new FilterSelectedEntity();
+        sortBean_c.setTid(2);
+        sortBean_c.setName("价格从高到低");
+        sortBean_c.setSelected(0);
 
-        FilterSelectedEntity ff3 = new FilterSelectedEntity();
-        ff3.setTid(3);
-        ff3.setName("日价从低到高");
-        ff3.setSelected(0);
-
-
-        FilterSelectedEntity ff4 = new FilterSelectedEntity();
-        ff4.setTid(4);
-        ff4.setName("日价从高到低");
-        ff4.setSelected(0);
-
-        FilterSelectedEntity ff5 = new FilterSelectedEntity();
-        ff5.setTid(5);
-        ff5.setName("时间从早到晚");
-        ff5.setSelected(0);
+        FilterSelectedEntity sortBean_d = new FilterSelectedEntity();
+        sortBean_d.setTid(3);
+        sortBean_d.setName("日价从低到高");
+        sortBean_d.setSelected(0);
 
 
-        FilterSelectedEntity ff6 = new FilterSelectedEntity();
-        ff6.setTid(6);
-        ff6.setName("时间从晚到早");
-        ff6.setSelected(0);
-        mSortList.add(ff);
-        mSortList.add(ff1);
-        mSortList.add(ff2);
-        mSortList.add(ff3);
-        mSortList.add(ff4);
-        mSortList.add(ff5);
-        mSortList.add(ff6);
+        FilterSelectedEntity sortBean_e = new FilterSelectedEntity();
+        sortBean_e.setTid(4);
+        sortBean_e.setName("日价从高到低");
+        sortBean_e.setSelected(0);
+
+        FilterSelectedEntity sortBean_f = new FilterSelectedEntity();
+        sortBean_f.setTid(5);
+        sortBean_f.setName("时间从早到晚");
+        sortBean_f.setSelected(0);
 
 
-        mAreaSizeList.add(ff);
-        mAreaSizeList.add(ff1);
-        mAreaSizeList.add(ff2);
-        mAreaSizeList.add(ff3);
-        mAreaSizeList.add(ff4);
-        mAreaSizeList.add(ff5);
-        mAreaSizeList.add(ff6);
+        FilterSelectedEntity sortBean_g = new FilterSelectedEntity();
+        sortBean_g.setTid(6);
+        sortBean_g.setName("时间从晚到早");
+        sortBean_g.setSelected(0);
+
+        mSortList.add(sortBean_a);
+        mSortList.add(sortBean_c);
+        mSortList.add(sortBean_d);
+        mSortList.add(sortBean_e);
+        mSortList.add(sortBean_f);
+        mSortList.add(sortBean_g);
+
+        mAreaSizeList.add(sortBean_a);
+        mAreaSizeList.add(sortBean_b);
+        mAreaSizeList.add(sortBean_c);
+        mAreaSizeList.add(sortBean_d);
+        mAreaSizeList.add(sortBean_e);
+        mAreaSizeList.add(sortBean_f);
+        mAreaSizeList.add(sortBean_g);
 
     }
 
@@ -171,167 +170,169 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
      * 设置更多数据
      */
     private void setMoreData() {
+        //形态数据集合------------------------------------
+        List<FilterSelectedEntity> typeList = new ArrayList<>();
         FilterMulSelectEntity filterOneEntity = new FilterMulSelectEntity();
-        List<FilterSelectedEntity> list = new ArrayList<>();
         filterOneEntity.setIsCan(1);
         filterOneEntity.setSelecteStatus(1);
-        filterOneEntity.setSortdata(list);
+        filterOneEntity.setSortdata(typeList);
         filterOneEntity.setSortname("形态");
-        FilterSelectedEntity f1 = new FilterSelectedEntity();
-        f1.setSelected(0);
-        f1.setName("公寓");
-        f1.setSelecteStatus(0);
-        f1.setTid(1);
-        list.add(f1);
 
-        FilterSelectedEntity f2 = new FilterSelectedEntity();
-        f2.setSelected(0);
-        f2.setName("电梯大楼");
-        f2.setSelecteStatus(0);
-        f2.setTid(2);
-        list.add(f2);
+        FilterSelectedEntity f_a = new FilterSelectedEntity();
+        f_a.setSelected(0);
+        f_a.setName("公寓");
+        f_a.setSelecteStatus(0);
+        f_a.setTid(1);
+        typeList.add(f_a);
 
-        FilterSelectedEntity f3 = new FilterSelectedEntity();
-        f3.setSelected(0);
-        f3.setName("透天");
-        f3.setSelecteStatus(0);
-        f3.setTid(3);
-        list.add(f3);
+        FilterSelectedEntity f_b = new FilterSelectedEntity();
+        f_b.setSelected(0);
+        f_b.setName("电梯大楼");
+        f_b.setSelecteStatus(0);
+        f_b.setTid(2);
+        typeList.add(f_b);
 
-        FilterSelectedEntity f4 = new FilterSelectedEntity();
-        f4.setSelected(0);
-        f4.setName("别墅");
-        f4.setSelecteStatus(0);
-        f4.setTid(4);
-        list.add(f4);
+        FilterSelectedEntity f_c = new FilterSelectedEntity();
+        f_c.setSelected(0);
+        f_c.setName("透天");
+        f_c.setSelecteStatus(0);
+        f_c.setTid(3);
+        typeList.add(f_c);
+
+        FilterSelectedEntity f_d = new FilterSelectedEntity();
+        f_d.setSelected(0);
+        f_d.setName("别墅");
+        f_d.setSelecteStatus(0);
+        f_d.setTid(4);
+        typeList.add(f_d);
+
+
+        //屋龄数据集合------------------------------------
+        FilterMulSelectEntity filterOneEntity_a = new FilterMulSelectEntity();
+        List<FilterSelectedEntity> houseAgeList = new ArrayList<>();
+        filterOneEntity_a.setIsCan(1);
+        filterOneEntity_a.setSelecteStatus(1);
+        filterOneEntity_a.setSortdata(houseAgeList);
+        filterOneEntity_a.setSortname("屋龄");
+
+        FilterSelectedEntity ff_a = new FilterSelectedEntity();
+        ff_a.setSelected(0);
+        ff_a.setName("5年以下");
+        ff_a.setSelecteStatus(0);
+        ff_a.setTid(1);
+        houseAgeList.add(ff_a);
+
+        FilterSelectedEntity ff_b = new FilterSelectedEntity();
+        ff_b.setSelected(0);
+        ff_b.setName("5-10年");
+        ff_b.setSelecteStatus(0);
+        ff_b.setTid(2);
+        houseAgeList.add(ff_b);
+
+        FilterSelectedEntity ff_c = new FilterSelectedEntity();
+        ff_c.setSelected(0);
+        ff_c.setName("10-20年");
+        ff_c.setSelecteStatus(0);
+        ff_c.setTid(3);
+        houseAgeList.add(ff_c);
+
+        FilterSelectedEntity ff_d = new FilterSelectedEntity();
+        ff_d.setSelected(0);
+        ff_d.setName("20-30年");
+        ff_d.setSelecteStatus(0);
+        ff_d.setTid(4);
+        houseAgeList.add(ff_d);
+
+
 //---------------------------------------------
 
 
-        FilterMulSelectEntity filterOneEntity1 = new FilterMulSelectEntity();
-        List<FilterSelectedEntity> list1 = new ArrayList<>();
-        filterOneEntity1.setIsCan(1);
-        filterOneEntity1.setSelecteStatus(1);
-        filterOneEntity1.setSortdata(list1);
-        filterOneEntity1.setSortname("屋龄");
-        FilterSelectedEntity ff1 = new FilterSelectedEntity();
-        ff1.setSelected(0);
-        ff1.setName("5年以下");
-        ff1.setSelecteStatus(0);
-        ff1.setTid(1);
-        list1.add(ff1);
+        FilterMulSelectEntity filterOneEntity_b = new FilterMulSelectEntity();
+        List<FilterSelectedEntity> floorList = new ArrayList<>();
+        filterOneEntity_b.setIsCan(1);
+        filterOneEntity_b.setSelecteStatus(1);
+        filterOneEntity_b.setSortdata(floorList);
+        filterOneEntity_b.setSortname("楼层");
+        FilterSelectedEntity fff_a = new FilterSelectedEntity();
+        fff_a.setSelected(0);
+        fff_a.setName("1楼以下");
+        fff_a.setSelecteStatus(0);
+        fff_a.setTid(1);
+        floorList.add(fff_a);
 
-        FilterSelectedEntity ff2 = new FilterSelectedEntity();
-        ff2.setSelected(0);
-        ff2.setName("5-10年");
-        ff2.setSelecteStatus(0);
-        ff2.setTid(2);
-        list1.add(ff2);
+        FilterSelectedEntity fff_c = new FilterSelectedEntity();
+        fff_c.setSelected(0);
+        fff_c.setName("1-3楼");
+        fff_c.setSelecteStatus(0);
+        fff_c.setTid(2);
+        floorList.add(fff_c);
 
-        FilterSelectedEntity ff3 = new FilterSelectedEntity();
-        ff3.setSelected(0);
-        ff3.setName("10-20年");
-        ff3.setSelecteStatus(0);
-        ff3.setTid(3);
-        list1.add(ff3);
+        FilterSelectedEntity fff_d = new FilterSelectedEntity();
+        fff_d.setSelected(0);
+        fff_d.setName("4-6楼");
+        fff_d.setSelecteStatus(0);
+        fff_d.setTid(3);
+        floorList.add(fff_d);
 
-        FilterSelectedEntity ff4 = new FilterSelectedEntity();
-        ff4.setSelected(0);
-        ff4.setName("20-30年");
-        ff4.setSelecteStatus(0);
-        ff4.setTid(4);
-        list1.add(ff4);
-
-
-//---------------------------------------------
-
-
-        FilterMulSelectEntity filterOneEntity2 = new FilterMulSelectEntity();
-        List<FilterSelectedEntity> list2 = new ArrayList<>();
-        filterOneEntity2.setIsCan(1);
-        filterOneEntity2.setSelecteStatus(1);
-        filterOneEntity2.setSortdata(list2);
-        filterOneEntity2.setSortname("楼层");
-        FilterSelectedEntity fff1 = new FilterSelectedEntity();
-        fff1.setSelected(0);
-        fff1.setName("1楼以下");
-        fff1.setSelecteStatus(0);
-        fff1.setTid(1);
-        list2.add(fff1);
-
-        FilterSelectedEntity fff2 = new FilterSelectedEntity();
-        fff2.setSelected(0);
-        fff2.setName("1-3楼");
-        fff2.setSelecteStatus(0);
-        fff2.setTid(2);
-        list2.add(fff2);
-
-        FilterSelectedEntity fff3 = new FilterSelectedEntity();
-        fff3.setSelected(0);
-        fff3.setName("4-6楼");
-        fff3.setSelecteStatus(0);
-        fff3.setTid(3);
-        list2.add(fff3);
-
-        FilterSelectedEntity fff4 = new FilterSelectedEntity();
-        fff4.setSelected(0);
-        fff4.setName("7-9楼");
-        fff4.setSelecteStatus(0);
-        fff4.setTid(4);
-        list2.add(fff4);
+        FilterSelectedEntity fff_e = new FilterSelectedEntity();
+        fff_e.setSelected(0);
+        fff_e.setName("7-9楼");
+        fff_e.setSelecteStatus(0);
+        fff_e.setTid(4);
+        floorList.add(fff_e);
 
 
         mMoreList.add(filterOneEntity);
-        mMoreList.add(filterOneEntity1);
-        mMoreList.add(filterOneEntity2);
-
-
+        mMoreList.add(filterOneEntity_a);
+        mMoreList.add(filterOneEntity_b);
     }
 
     /**
      * 设置总价数据
      */
     private void setAllPriceData() {
-        FilterSelectedEntity filterSelectedEntity = new FilterSelectedEntity();
-        filterSelectedEntity.setTid(0);
-        filterSelectedEntity.setName("不限");
-        filterSelectedEntity.setSelecteStatus(1);
-        FilterSelectedEntity filterSelectedEntity1 = new FilterSelectedEntity();
-        filterSelectedEntity1.setTid(1);
-        filterSelectedEntity1.setName("100");
-        filterSelectedEntity1.setSelecteStatus(0);
+        FilterSelectedEntity filterSelectedEntity_a = new FilterSelectedEntity();
+        filterSelectedEntity_a.setTid(0);
+        filterSelectedEntity_a.setName("不限");
+        filterSelectedEntity_a.setSelecteStatus(1);
 
-        FilterSelectedEntity filterSelectedEntity2 = new FilterSelectedEntity();
-        filterSelectedEntity2.setTid(2);
-        filterSelectedEntity2.setName("200");
-        filterSelectedEntity2.setSelecteStatus(0);
+        FilterSelectedEntity filterSelectedEntity_b = new FilterSelectedEntity();
+        filterSelectedEntity_b.setTid(1);
+        filterSelectedEntity_b.setName("100");
+        filterSelectedEntity_b.setSelecteStatus(0);
 
-        FilterSelectedEntity filterSelectedEntity3 = new FilterSelectedEntity();
-        filterSelectedEntity3.setTid(3);
-        filterSelectedEntity3.setName("300");
-        filterSelectedEntity3.setSelecteStatus(0);
+        FilterSelectedEntity filterSelectedEntity_c = new FilterSelectedEntity();
+        filterSelectedEntity_c.setTid(2);
+        filterSelectedEntity_c.setName("200");
+        filterSelectedEntity_c.setSelecteStatus(0);
 
-        FilterSelectedEntity filterSelectedEntity4 = new FilterSelectedEntity();
-        filterSelectedEntity4.setTid(4);
-        filterSelectedEntity4.setName("400");
-        filterSelectedEntity4.setSelecteStatus(0);
+        FilterSelectedEntity filterSelectedEntity_d = new FilterSelectedEntity();
+        filterSelectedEntity_d.setTid(3);
+        filterSelectedEntity_d.setName("300");
+        filterSelectedEntity_d.setSelecteStatus(0);
 
-        FilterSelectedEntity filterSelectedEntity5 = new FilterSelectedEntity();
-        filterSelectedEntity5.setTid(5);
-        filterSelectedEntity5.setName("500");
-        filterSelectedEntity5.setSelecteStatus(0);
+        FilterSelectedEntity filterSelectedEntity_e = new FilterSelectedEntity();
+        filterSelectedEntity_e.setTid(4);
+        filterSelectedEntity_e.setName("400");
+        filterSelectedEntity_e.setSelecteStatus(0);
 
-        FilterSelectedEntity filterSelectedEntity6 = new FilterSelectedEntity();
-        filterSelectedEntity6.setTid(6);
-        filterSelectedEntity6.setName("600");
-        filterSelectedEntity6.setSelecteStatus(0);
+        FilterSelectedEntity filterSelectedEntity_f = new FilterSelectedEntity();
+        filterSelectedEntity_f.setTid(5);
+        filterSelectedEntity_f.setName("500");
+        filterSelectedEntity_f.setSelecteStatus(0);
 
-        mAllPriceList.add(filterSelectedEntity);
-        mAllPriceList.add(filterSelectedEntity1);
-        mAllPriceList.add(filterSelectedEntity2);
-        mAllPriceList.add(filterSelectedEntity3);
-        mAllPriceList.add(filterSelectedEntity4);
-        mAllPriceList.add(filterSelectedEntity5);
-        mAllPriceList.add(filterSelectedEntity6);
+        FilterSelectedEntity filterSelectedEntity_g = new FilterSelectedEntity();
+        filterSelectedEntity_g.setTid(6);
+        filterSelectedEntity_g.setName("600");
+        filterSelectedEntity_g.setSelecteStatus(0);
+
+        mAllPriceList.add(filterSelectedEntity_a);
+        mAllPriceList.add(filterSelectedEntity_b);
+        mAllPriceList.add(filterSelectedEntity_c);
+        mAllPriceList.add(filterSelectedEntity_d);
+        mAllPriceList.add(filterSelectedEntity_e);
+        mAllPriceList.add(filterSelectedEntity_f);
+        mAllPriceList.add(filterSelectedEntity_g);
     }
 
 
@@ -339,49 +340,49 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
      * 设置单价数据
      */
     private void setSinglePriceData() {
-        FilterSelectedEntity filterSelectedEntity = new FilterSelectedEntity();
-        filterSelectedEntity.setTid(0);
-        filterSelectedEntity.setName("不限");
-        filterSelectedEntity.setSelecteStatus(1);
+        FilterSelectedEntity filterSelectedEntity_a = new FilterSelectedEntity();
+        filterSelectedEntity_a.setTid(0);
+        filterSelectedEntity_a.setName("不限");
+        filterSelectedEntity_a.setSelecteStatus(1);
 
 
-        FilterSelectedEntity filterSelectedEntity1 = new FilterSelectedEntity();
-        filterSelectedEntity1.setTid(1);
-        filterSelectedEntity1.setName("1000");
-        filterSelectedEntity1.setSelecteStatus(0);
+        FilterSelectedEntity filterSelectedEntity_b = new FilterSelectedEntity();
+        filterSelectedEntity_b.setTid(1);
+        filterSelectedEntity_b.setName("1000");
+        filterSelectedEntity_b.setSelecteStatus(0);
 
-        FilterSelectedEntity filterSelectedEntity2 = new FilterSelectedEntity();
-        filterSelectedEntity2.setTid(2);
-        filterSelectedEntity2.setName("2000");
-        filterSelectedEntity2.setSelecteStatus(0);
+        FilterSelectedEntity filterSelectedEntity_c = new FilterSelectedEntity();
+        filterSelectedEntity_c.setTid(2);
+        filterSelectedEntity_c.setName("2000");
+        filterSelectedEntity_c.setSelecteStatus(0);
 
-        FilterSelectedEntity filterSelectedEntity3 = new FilterSelectedEntity();
-        filterSelectedEntity3.setTid(3);
-        filterSelectedEntity3.setName("3000");
-        filterSelectedEntity3.setSelecteStatus(0);
+        FilterSelectedEntity filterSelectedEntity_d = new FilterSelectedEntity();
+        filterSelectedEntity_d.setTid(3);
+        filterSelectedEntity_d.setName("3000");
+        filterSelectedEntity_d.setSelecteStatus(0);
 
-        FilterSelectedEntity filterSelectedEntity4 = new FilterSelectedEntity();
-        filterSelectedEntity4.setTid(4);
-        filterSelectedEntity4.setName("4000");
-        filterSelectedEntity4.setSelecteStatus(0);
+        FilterSelectedEntity filterSelectedEntity_e = new FilterSelectedEntity();
+        filterSelectedEntity_e.setTid(4);
+        filterSelectedEntity_e.setName("4000");
+        filterSelectedEntity_e.setSelecteStatus(0);
 
-        FilterSelectedEntity filterSelectedEntity5 = new FilterSelectedEntity();
-        filterSelectedEntity5.setTid(5);
-        filterSelectedEntity5.setName("5000");
-        filterSelectedEntity5.setSelecteStatus(0);
+        FilterSelectedEntity filterSelectedEntity_f = new FilterSelectedEntity();
+        filterSelectedEntity_f.setTid(5);
+        filterSelectedEntity_f.setName("5000");
+        filterSelectedEntity_f.setSelecteStatus(0);
 
-        FilterSelectedEntity filterSelectedEntity6 = new FilterSelectedEntity();
-        filterSelectedEntity6.setTid(6);
-        filterSelectedEntity6.setName("6000");
-        filterSelectedEntity6.setSelecteStatus(0);
+        FilterSelectedEntity filterSelectedEntity_g = new FilterSelectedEntity();
+        filterSelectedEntity_g.setTid(6);
+        filterSelectedEntity_g.setName("6000");
+        filterSelectedEntity_g.setSelecteStatus(0);
 
-        mSinglePriceList.add(filterSelectedEntity);
-        mSinglePriceList.add(filterSelectedEntity1);
-        mSinglePriceList.add(filterSelectedEntity2);
-        mSinglePriceList.add(filterSelectedEntity3);
-        mSinglePriceList.add(filterSelectedEntity4);
-        mSinglePriceList.add(filterSelectedEntity5);
-        mSinglePriceList.add(filterSelectedEntity6);
+        mSinglePriceList.add(filterSelectedEntity_a);
+        mSinglePriceList.add(filterSelectedEntity_b);
+        mSinglePriceList.add(filterSelectedEntity_c);
+        mSinglePriceList.add(filterSelectedEntity_d);
+        mSinglePriceList.add(filterSelectedEntity_e);
+        mSinglePriceList.add(filterSelectedEntity_f);
+        mSinglePriceList.add(filterSelectedEntity_g);
     }
 
     /**
@@ -389,28 +390,28 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
      */
     private void setAreaData() {
         try {
-            FilterAreaOneEntity filterOneEntity = new FilterAreaOneEntity();
-            filterOneEntity.setArea_id(0);
-            filterOneEntity.setName("区域0");
-            filterOneEntity.setSelected(1);
-            filterOneEntity.setFilterAreaEntityList(loadAreaData());
+            FilterAreaOneEntity filterOneEntity_a = new FilterAreaOneEntity();
+            filterOneEntity_a.setArea_id(0);
+            filterOneEntity_a.setName("区域0");
+            filterOneEntity_a.setSelected(1);
+            filterOneEntity_a.setFilterAreaEntityList(loadAreaData());
 
-            FilterAreaOneEntity filterOneEntity2 = new FilterAreaOneEntity();
-            filterOneEntity2.setArea_id(1);
-            filterOneEntity2.setName("捷运1");
-            filterOneEntity2.setSelected(0);
-            filterOneEntity2.setFilterAreaEntityList(loadSubWayData());
+            FilterAreaOneEntity filterOneEntity_b = new FilterAreaOneEntity();
+            filterOneEntity_b.setArea_id(1);
+            filterOneEntity_b.setName("捷运1");
+            filterOneEntity_b.setSelected(0);
+            filterOneEntity_b.setFilterAreaEntityList(loadSubWayData());
 
-            FilterAreaOneEntity filterOneEntity3 = new FilterAreaOneEntity();
-            filterOneEntity3.setArea_id(2);
-            filterOneEntity3.setName("附近2");
-            filterOneEntity3.setSelected(0);
-            filterOneEntity3.setFilterAreaEntityList(loadNearData());
+            FilterAreaOneEntity filterOneEntity_c = new FilterAreaOneEntity();
+            filterOneEntity_c.setArea_id(2);
+            filterOneEntity_c.setName("附近2");
+            filterOneEntity_c.setSelected(0);
+            filterOneEntity_c.setFilterAreaEntityList(loadNearData());
 
 
-            mAreaList.add(filterOneEntity);
-            mAreaList.add(filterOneEntity2);
-            mAreaList.add(filterOneEntity3);
+            mAreaList.add(filterOneEntity_a);
+            mAreaList.add(filterOneEntity_b);
+            mAreaList.add(filterOneEntity_c);
         } catch (Exception e) {
 
         }
@@ -423,24 +424,24 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
      */
     public List<FilterAreaTwoEntity> loadNearData() {
         List<FilterAreaTwoEntity> areaList = new ArrayList<>();
-        FilterAreaTwoEntity area = new FilterAreaTwoEntity();
-        area.setArea_id(0);
-        area.setName("1000");
-        area.setSelected(0);
+        FilterAreaTwoEntity area_a = new FilterAreaTwoEntity();
+        area_a.setArea_id(0);
+        area_a.setName("1000");
+        area_a.setSelected(0);
 
-        FilterAreaTwoEntity area1 = new FilterAreaTwoEntity();
-        area1.setArea_id(1);
-        area1.setName("2000");
-        area1.setSelected(0);
+        FilterAreaTwoEntity area_b = new FilterAreaTwoEntity();
+        area_b.setArea_id(1);
+        area_b.setName("2000");
+        area_b.setSelected(0);
 
-        FilterAreaTwoEntity area2 = new FilterAreaTwoEntity();
-        area2.setArea_id(2);
-        area2.setName("3000");
-        area2.setSelected(0);
+        FilterAreaTwoEntity area_c = new FilterAreaTwoEntity();
+        area_c.setArea_id(2);
+        area_c.setName("3000");
+        area_c.setSelected(0);
 
-        areaList.add(area);
-        areaList.add(area1);
-        areaList.add(area2);
+        areaList.add(area_a);
+        areaList.add(area_b);
+        areaList.add(area_c);
         return areaList;
     }
 
