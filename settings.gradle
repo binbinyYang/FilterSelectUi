@@ -1,0 +1,3 @@
+include ':lib_filtertab'
+include ':app'
+rootProject.name = "FilterBoxUi"

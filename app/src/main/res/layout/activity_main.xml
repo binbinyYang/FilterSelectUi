@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_bar"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:text="标题"
+        android:textColor="#ffffff"/>
+
+
+    <com.yangbin.view.FilterTabView
+        android:id="@+id/ftb_filter"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_bar"
+        android:background="@color/white"
+        app:btn_solid_unselect_color="#F5F5F5"
+        app:btn_corner_radius="24dp"
+        app:btn_stroke_select_color="@color/color_ff8800"
+        app:btn_stroke_unselect_color="#F5F5F5"
+        app:btn_text_select_color="@color/color_ff8800"
+        app:btn_text_unselect_color="@color/color_222222"
+        app:tab_text_style="0"
+        app:column_num="3"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"/>
+
+
+</LinearLayout>

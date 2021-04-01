@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_input"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <View
+        android:id="@+id/v_divide"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/color_default_divide_line"
+      />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/et_min_price"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_edittext_price"
+            android:gravity="center"
+            android:hint="@string/min_price"
+            android:inputType="number"
+            android:lines="1"
+            android:maxLength="4"
+            android:textColor="@color/color_default_text"
+            android:textColorHint="@color/color_cccccc"
+            android:textSize="14sp"
+            app:layout_constraintDimensionRatio="2.7"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_divide"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.2" />
+
+        <TextView
+            android:id="@+id/tv_to"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:lines="1"
+            android:maxLength="4"
+            android:text="@string/to"
+            android:textColor="@color/color_default_text"
+            android:textSize="15sp"
+            app:layout_constraintDimensionRatio="1.32"
+            app:layout_constraintLeft_toRightOf="@+id/et_min_price"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.1" />
+
+        <EditText
+            android:id="@+id/et_max_price"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_edittext_price"
+            android:gravity="center"
+            android:hint="@string/max_price"
+            android:inputType="number"
+            android:lines="1"
+            android:maxLength="4"
+            android:textColorHint="@color/color_cccccc"
+            android:textSize="14sp"
+            app:layout_constraintDimensionRatio="2.7"
+            app:layout_constraintLeft_toRightOf="@+id/tv_to"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.2" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:lines="1"
+            android:text="@string/wan"
+            android:textColor="@color/color_default_text"
+            android:textSize="15sp"
+            app:layout_constraintDimensionRatio="1.32"
+            app:layout_constraintLeft_toRightOf="@+id/et_max_price"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.1" />
+
+        <Button
+            android:id="@+id/btn_price_confirm"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center|right"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/bg_button_confirm"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="@string/confirm"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintDimensionRatio="3.08"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.24" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="10dp"
+            android:background="@color/color_default_divide_line"
+            app:layout_constraintTop_toBottomOf="@+id/et_min_price" />
+
+    </LinearLayout>
+</LinearLayout>
