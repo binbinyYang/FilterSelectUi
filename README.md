@@ -82,6 +82,11 @@ javabean 要继承 BaseFilterBean，重写里面的方法
 控件调用之前最好初始化一下，避免加载失败重新加载数据是出现重复的问题。
 ```java
  ftb_filter.removeViews();
+  
+```
+ 拿到选择后对应的Tab名称
+```java
+ ftb_filter.removeViews();
  OnSelectFilterNameListener 实现这个接口可以拿到选择后对应的Tab名称
  ftb_filter.setOnSelectFilterNameListener(new OnSelectFilterNameListener() {
     @Override
