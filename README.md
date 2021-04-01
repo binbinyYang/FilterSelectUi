@@ -1,12 +1,32 @@
-![]( https://img.shields.io/badge/PRs-welcome+-green.svg)       ![]( https://img.shields.io/badge/License-A+-green.svg)
+![]( https://img.shields.io/badge/PRs-welcome-green.svg)    ![]( https://img.shields.io/badge/JitPack-1.0-green.svg)
 # FilterSelectUi
 房产类APP条件筛选框，包含区域（单选，多选），竖着排列（单选，多选），横向排列（单选，多选）
 -------  
 
-![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/1.gif)
-![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/2.gif)
-![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/3.gif)
-![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/4.gif)
+要将Git项目放入您的构建中：
+
+ 步骤1.将JitPack存储库添加到您的构建文件中
+----
+
+```java
+ allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+ 步骤2.添加依赖项
+----
+```java
+dependencies {
+	        implementation 'com.github.binbinyYang:FilterSelectUi:Tag'
+	}
+```
+
+
+![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/1.gif) ![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/2.gif)
+![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/3.gif) ![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/4.gif)
 ![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/5.gif)
  
 
@@ -82,7 +102,10 @@ javabean 要继承 BaseFilterBean，重写里面的方法
 控件调用之前最好初始化一下，避免加载失败重新加载数据是出现重复的问题。
 ```java
  ftb_filter.removeViews();
- OnSelectFilterNameListener 实现这个接口可以拿到选择后对应的Tab名称
+  
+```
+  OnSelectFilterNameListener 实现这个接口可以拿到选择后对应的Tab名称
+```java
  ftb_filter.setOnSelectFilterNameListener(new OnSelectFilterNameListener() {
     @Override
     public void onSelectFilterName(String name, int popupindex) {
