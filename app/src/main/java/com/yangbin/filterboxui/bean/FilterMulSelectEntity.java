@@ -23,7 +23,7 @@ public class FilterMulSelectEntity extends BaseFilterBean {
      */
     private List<FilterSelectedEntity> sortdata;
 
-    private int isCan;
+    private int isCan;// 0 单选  1多选
 
     public int getIsCan() {
         return isCan;

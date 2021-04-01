@@ -425,8 +425,11 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
             //遍历, 将 不是该位置的window消失
             for (int i = 0; i < mPopupWs.size(); i++) {
                 if (i != currentIndex) {
-                    mPopupWs.get(i).dismiss();
+                    if (mPopupWs.get(i).isShowing()) {
+                        mPopupWs.get(i).dismiss();
+                    }
                     setArrowDirection(mTextViewLists.get(i), false);
+
                 } else {
                     setArrowDirection(mTextViewLists.get(i), true);
 
@@ -436,17 +439,11 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
             if (mPopupWs.get(currentIndex).isShowing()) {
                 mPopupWs.get(currentIndex).dismiss();
             } else {
-
-                try {
-
-
-                if ( !((Activity) mContext).isFinishing()) {
+                if (!((Activity) mContext).isFinishing()) {
                     Log.e("=========", "崩溃了");
                     mPopupWs.get(currentIndex).show(this);
                 }
-            }catch (Exception e){
 
-                }
             }
         }
     }
@@ -630,7 +627,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
 
     @Override
     public void onFilterListToView(List<FilterResultBean> resultBeans, int postion) {
-        if (resultBeans.get(0).getPopupType() == FilterTabConfig.FILTER_TYPE_AREA||resultBeans.get(0).getPopupType() == FilterTabConfig.FILTER_TYPE_SINGLE_GIRD||resultBeans.get(0).getPopupType() == FilterTabConfig.FILTER_TYPE_PRICE_HORIZONTAL) {
+        if (resultBeans.get(0).getPopupType() == FilterTabConfig.FILTER_TYPE_AREA || resultBeans.get(0).getPopupType() == FilterTabConfig.FILTER_TYPE_SINGLE_GIRD || resultBeans.get(0).getPopupType() == FilterTabConfig.FILTER_TYPE_PRICE_HORIZONTAL) {
             int popupIndex = resultBeans.get(0).getPopupIndex();
             String itemName = "";
             if (resultBeans.size() == 1 && resultBeans.get(0).getItemId() == 0) {
@@ -661,7 +658,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
             }
             mHasSelected.put(popupIndex, resultBeans);
             onSelectResultListener.onSelectResultList(resultBeans, postion);
-        }else {
+        } else {
 
 
             int popupIndex = resultBeans.get(0).getPopupIndex();
@@ -789,7 +786,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
     }
 
 
-    public void resetTab(int currentIndex, List<BaseFilterBean> resultBeans, String title ) {
+    public void resetTab(int currentIndex, List<BaseFilterBean> resultBeans, String title) {
         List<BaseFilterBean> datas = mDataList.get(currentIndex);
         datas.clear();
         datas.addAll(resultBeans);
@@ -797,9 +794,6 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
         mTextViewLists.get(currentIndex).setText(mTextContents.get(currentIndex));
         mTextViewLists.get(currentIndex).setTextColor(getResources().getColor(R.color.black));
     }
-
-
-
 
 
 }
