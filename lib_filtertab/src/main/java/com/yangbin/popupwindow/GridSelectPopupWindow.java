@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.yangbin.adapter.ItemSelectAdapter1;
+import com.yangbin.adapter.ItemSelectAdapter;
 import com.yangbin.base.BaseFilterBean;
 import com.yangbin.base.BasePopupWindow;
 import com.yangbin.bean.FilterResultBean;
@@ -27,7 +27,7 @@ import java.util.List;
 public class GridSelectPopupWindow extends BasePopupWindow {
     private int mTabPostion;
     private RecyclerView rv_content;
-    private ItemSelectAdapter1 mAdapter;
+    private ItemSelectAdapter mAdapter;
     private TextView tv_bottom;
     private List<FilterResultBean> mSelectList;
 
@@ -42,7 +42,7 @@ public class GridSelectPopupWindow extends BasePopupWindow {
         rv_content = rootView.findViewById(R.id.rv_content);
         tv_bottom = rootView.findViewById(R.id.tv_bottom);
         boolean isCanMulSelect = getData().get(0).isCanMulSelect();
-        mAdapter = new ItemSelectAdapter1(getContext(), getData(),true);
+        mAdapter = new ItemSelectAdapter(getContext(), getData(),true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),3);
         rv_content.setLayoutManager(gridLayoutManager);
         rv_content.setAdapter(mAdapter);

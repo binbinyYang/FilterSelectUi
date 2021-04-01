@@ -18,20 +18,21 @@ import com.yangbin.util.SpUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class TwoParentAdapter extends RecyclerView.Adapter {
+/**
+ * 区域筛选--适配器  三级联动   子类
+ */
+public class AreaTwoAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
     private OnItemClickListener onItemClickListener;
     private List<BaseFilterBean> mList = new ArrayList<>();
-    private List<BaseFilterBean> mmmmm = new ArrayList<>();
     private Handler mHandler;
 
     /**
      * 当前选中的item position
      */
 
-    public TwoParentAdapter(Context context, List<BaseFilterBean> list, Handler handler) {
+    public AreaTwoAdapter(Context context, List<BaseFilterBean> list, Handler handler) {
         mContext = context;
         mHandler = handler;
         mList = list;

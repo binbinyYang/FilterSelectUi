@@ -12,7 +12,7 @@ public class SpUtils {
     private SharedPreferences.Editor editor;
     private Context mContext;
 
-    private SpUtils (Context context) {
+    private SpUtils(Context context) {
         mContext = context;
         sharedPreferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -21,7 +21,7 @@ public class SpUtils {
     public static SpUtils getInstance(Context context) {
 
         if (instance == null) {
-            synchronized (SharedPreferences.class){
+            synchronized (SharedPreferences.class) {
                 if (instance == null) {
                     instance = new SpUtils(context.getApplicationContext());
                 }
@@ -32,6 +32,7 @@ public class SpUtils {
 
     /**
      * 选中字体为粗体的样式
+     *
      * @param value
      */
     public void putTextStyle(int value) {
@@ -45,6 +46,7 @@ public class SpUtils {
 
     /**
      * 主题色
+     *
      * @param value
      */
     public void putColorMain(int value) {
@@ -58,6 +60,7 @@ public class SpUtils {
 
     /**
      * button选中后边框的颜色
+     *
      * @param value
      */
     public void putStrokeSelectColor(int value) {
@@ -71,6 +74,7 @@ public class SpUtils {
 
     /**
      * button未选中后边框的颜色
+     *
      * @param value
      */
     public void putStrokeUnSelectColor(int value) {
@@ -84,6 +88,7 @@ public class SpUtils {
 
     /**
      * button未选中填充的颜色
+     *
      * @param value
      */
     public void putSolidUnSelectColor(int value) {
@@ -97,6 +102,7 @@ public class SpUtils {
 
     /**
      * button选中填充的颜色
+     *
      * @param value
      */
     public void putSolidSelectColor(int value) {
@@ -110,6 +116,7 @@ public class SpUtils {
 
     /**
      * button圆角弧度
+     *
      * @param value
      */
     public void putCornerRadius(float value) {
@@ -123,6 +130,7 @@ public class SpUtils {
 
     /**
      * button选中字体颜色
+     *
      * @param value
      */
     public void putTextSelect(int value) {
@@ -136,6 +144,7 @@ public class SpUtils {
 
     /**
      * button未选中字体颜色
+     *
      * @param value
      */
     public void putTextUnSelect(int value) {
@@ -149,6 +158,7 @@ public class SpUtils {
 
     /**
      * 多选Item的列数
+     *
      * @param value
      */
     public void putColumnNum(int value) {

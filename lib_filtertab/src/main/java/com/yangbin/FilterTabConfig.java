@@ -1,6 +1,9 @@
 package com.yangbin;
 
 
+/**
+ * 配置项
+ */
 public class FilterTabConfig {
 
     /**

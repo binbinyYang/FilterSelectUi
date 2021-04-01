@@ -119,7 +119,7 @@ public class DisplayHelper {
         }
         try {
             // used when SDK_INT >= 17; includes window decorations (statusbar bar/menu bar)
-            if(Build.VERSION.SDK_INT >= 17) {
+            if (Build.VERSION.SDK_INT >= 17) {
                 Point realSize = new Point();
                 d.getRealSize(realSize);
 
@@ -231,7 +231,7 @@ public class DisplayHelper {
      * @return
      */
     public static int getNavMenuHeight(Context context) {
-        if(!isNavMenuExist(context)){
+        if (!isNavMenuExist(context)) {
             return 0;
         }
         // 小米4没有nav bar, 而 navigation_bar_height 有值

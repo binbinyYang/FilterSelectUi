@@ -40,7 +40,7 @@ public class DeviceHelper {
             Class<?> clzSystemProperties = Class.forName("android.os.SystemProperties");
             Method getMethod = clzSystemProperties.getDeclaredMethod("get", String.class);
             // miui
-            sMiuiVersionName =getLowerCaseName(properties, getMethod, KEY_MIUI_VERSION_NAME);
+            sMiuiVersionName = getLowerCaseName(properties, getMethod, KEY_MIUI_VERSION_NAME);
             //flyme
             sFlymeVersionName = getLowerCaseName(properties, getMethod, KEY_FLYME_VERSION_NAME);
 
@@ -111,7 +111,7 @@ public class DeviceHelper {
     public static boolean isFlymeVersionHigher5_2_4() {
         //查不到默认高于5.2.4
         boolean isHigher = true;
-        if(sFlymeVersionName != null && !sFlymeVersionName.equals("")){
+        if (sFlymeVersionName != null && !sFlymeVersionName.equals("")) {
             Pattern pattern = Pattern.compile("(\\d+\\.){2}\\d");
             Matcher matcher = pattern.matcher(sFlymeVersionName);
             if (matcher.find()) {
@@ -225,7 +225,8 @@ public class DeviceHelper {
         if (name == null) {
             try {
                 name = (String) get.invoke(null, key);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
         if (name != null) name = name.toLowerCase();
         return name;

@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -47,6 +46,7 @@ public class Utils {
 
     /**
      * 获取屏幕的真实高度 如果有虚拟按键会算上虚拟按键的高度
+     *
      * @param context
      * @return
      */
@@ -107,13 +107,14 @@ public class Utils {
 
     /**
      * 获取手机屏幕高度
+     *
      * @param context
      * @return
      */
     public static int getScreenHeight(Context context) {
         int screenHeight = 0;
         try {
-            if(deviceHasNavigationBar()) {
+            if (deviceHasNavigationBar()) {
                 if (isMiuiSystem()) {
                     // 此时是不是切换为小米全面屏
                     if (isXIAOMIFullScreen(context)) {
@@ -165,10 +166,11 @@ public class Utils {
 
     /**
      * 判断小米手机是否为全面屏模式
+     *
      * @param context
      * @return
      */
-    public static boolean isXIAOMIFullScreen (Context context) {
+    public static boolean isXIAOMIFullScreen(Context context) {
         if (Build.VERSION.SDK_INT > 16) {
             boolean isFull = Settings.Global.getInt(context.getContentResolver(), "force_fsg_nav_bar", 0) != 0;
             return isFull;
@@ -181,7 +183,8 @@ public class Utils {
         if (name == null) {
             try {
                 name = (String) get.invoke(null, key);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
         if (name != null) name = name.toLowerCase();
         return name;
@@ -189,6 +192,7 @@ public class Utils {
 
     /**
      * 判断是否为小米手机
+     *
      * @return
      */
     public static boolean isMiuiSystem() {

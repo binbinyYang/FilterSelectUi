@@ -55,13 +55,13 @@ public class PriceUprightSelectPopupWindow extends BasePopupWindow {
     int recyclerHeight;
 
     /**
-     *  手机屏幕高度
+     * 手机屏幕高度
      */
     int mScreenHeight;
 
     public PriceUprightSelectPopupWindow(Context context, List data, int filterType, int position,
                                          OnFilterToViewListener onFilterToViewListener) {
-        super(context, data, filterType, position,onFilterToViewListener);
+        super(context, data, filterType, position, onFilterToViewListener);
         mTabPostion = position;
     }
 
@@ -111,7 +111,7 @@ public class PriceUprightSelectPopupWindow extends BasePopupWindow {
                     resultBean.setPopupIndex(getPosition());
                     resultBean.setItemId(itemId);
                     resultBean.setName(itemName);
-                    getOnFilterToViewListener().onFilterToView(resultBean,mTabPostion);
+                    getOnFilterToViewListener().onFilterToView(resultBean, mTabPostion);
 
                     int filterHeight = mAnchor.getHeight();
                     RelativeLayout.LayoutParams layoutParams
@@ -179,7 +179,7 @@ public class PriceUprightSelectPopupWindow extends BasePopupWindow {
                     resultBean.setItemId(-2);
                     resultBean.setName(name);
                     // -2 是用来区分手动输入价格
-                    getOnFilterToViewListener().onFilterToView(resultBean,mTabPostion);
+                    getOnFilterToViewListener().onFilterToView(resultBean, mTabPostion);
 
                     // 重置list信息
                     List<BaseFilterBean> list = getData();
@@ -203,7 +203,7 @@ public class PriceUprightSelectPopupWindow extends BasePopupWindow {
                     int h = mScreenHeight - filterHeight - toolbarHeight - statusBarHeight;
                     update(mAnchor, WindowManager.LayoutParams.MATCH_PARENT, h);
                     dismiss();
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

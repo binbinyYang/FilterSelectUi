@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.yangbin.adapter.ItemSelectAdapter2;
+import com.yangbin.adapter.GridleItemSelectAdapter;
 import com.yangbin.base.BaseFilterBean;
 import com.yangbin.base.BasePopupWindow;
 import com.yangbin.bean.FilterResultBean;
@@ -31,7 +31,7 @@ import java.util.List;
 public class PriceHorizontalSelectPopupWindow extends BasePopupWindow {
     private int mTabPostion;
     private RecyclerView rv_content;
-    private ItemSelectAdapter2 mAdapter;
+    private GridleItemSelectAdapter mAdapter;
     private TextView tv_bottom;
     private List<FilterResultBean> mSelectList;
     EditText et_min_price;
@@ -50,7 +50,7 @@ public class PriceHorizontalSelectPopupWindow extends BasePopupWindow {
         et_min_price = rootView.findViewById(R.id.et_min_price);
         et_max_price = rootView.findViewById(R.id.et_max_price);
         boolean isCanMulSelect = getData().get(0).isCanMulSelect();
-        mAdapter = new ItemSelectAdapter2(getContext(), getData(), true);
+        mAdapter = new GridleItemSelectAdapter(getContext(), getData(), true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
         rv_content.setLayoutManager(gridLayoutManager);
         rv_content.setAdapter(mAdapter);
@@ -133,26 +133,25 @@ public class PriceHorizontalSelectPopupWindow extends BasePopupWindow {
 //            }
 //        });
 
-     et_max_price.addTextChangedListener(new TextWatcher() {
-         @Override
-         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        et_max_price.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-         }
+            }
 
-         @Override
-         public void onTextChanged(CharSequence s, int start, int before, int count) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-         }
+            }
 
-         @Override
-         public void afterTextChanged(Editable s) {
+            @Override
+            public void afterTextChanged(Editable s) {
 
-             if(s.toString().length()>0){
-                 mAdapter.resetAll(getData());
-             }
-         }
-     });
-
+                if (s.toString().length() > 0) {
+                    mAdapter.resetAll(getData());
+                }
+            }
+        });
 
 
         et_min_price.addTextChangedListener(new TextWatcher() {
@@ -169,19 +168,19 @@ public class PriceHorizontalSelectPopupWindow extends BasePopupWindow {
             @Override
             public void afterTextChanged(Editable s) {
 
-                if(s.toString().length()>0){
+                if (s.toString().length() > 0) {
                     mAdapter.resetAll(getData());
                 }
             }
         });
 
-     mAdapter.setOnItemClickListener(new  ItemSelectAdapter2.OnItemClickListener() {
-         @Override
-         public void onItemClick(int position) {
-              et_min_price.setText("");
-              et_max_price.setText("");
-         }
-     });
+        mAdapter.setOnItemClickListener(new GridleItemSelectAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                et_min_price.setText("");
+                et_max_price.setText("");
+            }
+        });
         View v_outside = rootView.findViewById(R.id.v_outside);
         v_outside.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,7 +205,7 @@ public class PriceHorizontalSelectPopupWindow extends BasePopupWindow {
                     String message = null;
                     int min = TextUtils.isEmpty(minPrice) ? 0 : Integer.valueOf(minPrice);
                     int max = TextUtils.isEmpty(maxPrice) ? 0 : Integer.valueOf(maxPrice);
-                    if (!(min>0) || !(max>0)) {
+                    if (!(min > 0) || !(max > 0)) {
                         mSelectList.clear();
                         List<BaseFilterBean> list = getData();
                         if (list != null && list.size() > 0) {
@@ -225,7 +224,7 @@ public class PriceHorizontalSelectPopupWindow extends BasePopupWindow {
                             }
                         }
                         getOnFilterToViewListener().onFilterListToView(mSelectList, mTabPostion);
-                    }else  if (min>0 || max>0) {
+                    } else if (min > 0 || max > 0) {
                         if (min > max) {
                             message = mContext.getResources().getString(R.string.min_max);
                             Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();

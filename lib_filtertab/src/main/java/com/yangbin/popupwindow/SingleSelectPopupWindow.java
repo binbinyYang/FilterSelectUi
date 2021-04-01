@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.View;
 
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,17 +29,17 @@ public class SingleSelectPopupWindow extends BasePopupWindow {
     private PopupSingleAdapter mAdapter;
 
     public SingleSelectPopupWindow(Context context, List<BaseFilterBean> data, int filterType, int position, OnFilterToViewListener onFilterToViewListener) {
-        super(context, data, filterType,position,onFilterToViewListener);
-        mTabPostion= position;
+        super(context, data, filterType, position, onFilterToViewListener);
+        mTabPostion = position;
     }
 
     @Override
     public View initView() {
-        View rootView = LayoutInflater.from(getContext()).inflate(R.layout.popup_single_select, null,false);
+        View rootView = LayoutInflater.from(getContext()).inflate(R.layout.popup_single_select, null, false);
         rv_content = rootView.findViewById(R.id.rv_content);
         mAdapter = new PopupSingleAdapter(getContext(), getData());
         final int maxHeight = Utils.dp2px(getContext(), 273);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext()){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext()) {
             @Override
             public void setMeasuredDimension(Rect childrenBounds, int wSpec, int hSpec) {
                 super.setMeasuredDimension(childrenBounds, wSpec, View.MeasureSpec.makeMeasureSpec(maxHeight, AT_MOST));
@@ -73,7 +72,7 @@ public class SingleSelectPopupWindow extends BasePopupWindow {
                 resultBean.setPopupType(getFilterType());
                 resultBean.setItemId(itemId);
                 resultBean.setName(itemName);
-                getOnFilterToViewListener().onFilterToView(resultBean,mTabPostion);
+                getOnFilterToViewListener().onFilterToView(resultBean, mTabPostion);
                 dismiss();
             }
         });

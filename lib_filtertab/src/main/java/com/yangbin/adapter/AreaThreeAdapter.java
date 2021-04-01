@@ -16,14 +16,16 @@ import com.yangbin.util.SpUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class AreaChildAdapter extends RecyclerView.Adapter {
+/**
+ * 区域筛选--适配器  三级联动 第3个
+ */
+public class AreaThreeAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
     private List<BaseFilterBean> mList;
     private OnItemClickListener onItemClickListener;
 
-    public AreaChildAdapter(Context context) {
+    public AreaThreeAdapter(Context context) {
         mContext = context;
         mList = new ArrayList<>();
     }

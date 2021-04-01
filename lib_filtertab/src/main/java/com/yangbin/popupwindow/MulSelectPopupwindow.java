@@ -192,7 +192,7 @@ public class MulSelectPopupwindow extends BasePopupWindow implements View.OnClic
             resultBean.setSelectList(mSelectList);
             mList = new ArrayList<>();
             mList.addAll(deepCopy(getData()));
-            getOnFilterToViewListener().onFilterToView(resultBean,mTabPostion);
+            getOnFilterToViewListener().onFilterToView(resultBean, mTabPostion);
             dismiss();
         } catch (Exception e) {
             e.printStackTrace();

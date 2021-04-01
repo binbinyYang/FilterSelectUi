@@ -17,6 +17,9 @@ import com.yangbin.util.SpUtils;
 import java.util.List;
 
 
+/**
+ * 多选--适配器
+ */
 public class PopupMulAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
@@ -47,7 +50,7 @@ public class PopupMulAdapter extends RecyclerView.Adapter {
         viewHolder.tv_classify_name.setText(bean.getSortTitle());
 
 
-        final ItemSelectAdapter adapter = new ItemSelectAdapter(mContext, bean.getChildList(), bean.isCanMulSelect());
+        final MoreItemSelectAdapter adapter = new MoreItemSelectAdapter(mContext, bean.getChildList(), bean.isCanMulSelect());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, SpUtils.getInstance(mContext).getColumnNum());
         viewHolder.rv_select.setLayoutManager(gridLayoutManager);
         viewHolder.rv_select.setAdapter(adapter);

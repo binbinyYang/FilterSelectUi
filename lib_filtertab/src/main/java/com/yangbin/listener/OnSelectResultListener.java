@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OnSelectResultListener {
 
-    void onSelectResult(FilterResultBean resultBean,int postion);
+    void onSelectResult(FilterResultBean resultBean, int postion);
 
-    void onSelectResultList(List<FilterResultBean> resultBeans,int postion);
+    void onSelectResultList(List<FilterResultBean> resultBeans, int postion);
 }

@@ -15,7 +15,9 @@ import com.yangbin.util.SpUtils;
 
 import java.util.List;
 
-
+/**
+ * 单选 --适配器
+ */
 public class PopupSingleAdapter extends RecyclerView.Adapter {
 
     private Context mContext;

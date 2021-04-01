@@ -11,9 +11,9 @@ import android.widget.Button;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.yangbin.adapter.AreaChildAdapter;
+import com.yangbin.adapter.AreaThreeAdapter;
 import com.yangbin.adapter.AreaParentAdapter;
-import com.yangbin.adapter.TwoParentAdapter;
+import com.yangbin.adapter.AreaTwoAdapter;
 import com.yangbin.base.BaseFilterBean;
 import com.yangbin.base.BasePopupWindow;
 import com.yangbin.bean.FilterResultBean;
@@ -41,8 +41,8 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
     private Button mBtOk;
 
     private AreaParentAdapter mParentAdapter;
-    private TwoParentAdapter mTwoParentAdapter;
-    private AreaChildAdapter mChildAdapter;
+    private AreaTwoAdapter mTwoParentAdapter;
+    private AreaThreeAdapter mChildAdapter;
 
     /**
      * 初始化数据
@@ -204,7 +204,7 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
         rv_parent.setLayoutManager(linearLayoutManager);
         rv_parent.setAdapter(mParentAdapter);
 
-        mTwoParentAdapter = new TwoParentAdapter(getContext(), new ArrayList<BaseFilterBean>(), mHandler);
+        mTwoParentAdapter = new AreaTwoAdapter(getContext(), new ArrayList<BaseFilterBean>(), mHandler);
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
         rv_one.setLayoutManager(linearLayoutManager1);
         rv_one.setAdapter(mTwoParentAdapter);
@@ -213,7 +213,7 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
         rv_child = rootView.findViewById(R.id.rv_child);
         rv_child.setVisibility(View.GONE);
 
-        mChildAdapter = new AreaChildAdapter(getContext());
+        mChildAdapter = new AreaThreeAdapter(getContext());
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
         rv_child.setLayoutManager(linearLayoutManager2);
         rv_child.setAdapter(mChildAdapter);
@@ -309,7 +309,7 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
         });
 
 
-        mTwoParentAdapter.setOnItemClickListener(new TwoParentAdapter.OnItemClickListener() {
+        mTwoParentAdapter.setOnItemClickListener(new AreaTwoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 try {
@@ -357,7 +357,7 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
 
 
 
-        mChildAdapter.setOnItemClickListener(new AreaChildAdapter.OnItemClickListener() {
+        mChildAdapter.setOnItemClickListener(new AreaThreeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 try {

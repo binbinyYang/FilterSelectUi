@@ -25,7 +25,9 @@ import java.util.List;
 
 
 public abstract class BasePopupWindow extends PopupWindow {
-
+    /**
+     * 动画时间
+     */
     private final static int ANIMATION_TIME = 350;
     /**
      * 筛选View

@@ -15,7 +15,7 @@ import java.lang.reflect.Field;
 
 
 public final class KeyboardUtils {
-    private static int                        sContentViewInvisibleHeightPre;
+    private static int sContentViewInvisibleHeightPre;
     private static ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener;
     private static OnSoftInputChangedListener onSoftInputChangedListener;
 
@@ -47,7 +47,7 @@ public final class KeyboardUtils {
      *
      * @param view The view.
      */
-    public static void showSoftInput(final View view,Context context) {
+    public static void showSoftInput(final View view, Context context) {
         InputMethodManager imm =
                 (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) return;
@@ -76,7 +76,7 @@ public final class KeyboardUtils {
      *
      * @param view The view.
      */
-    public static void hideSoftInput(final View view,Context context) {
+    public static void hideSoftInput(final View view, Context context) {
         InputMethodManager imm =
                 (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) return;

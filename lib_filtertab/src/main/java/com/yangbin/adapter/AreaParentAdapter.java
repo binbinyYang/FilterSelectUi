@@ -17,7 +17,9 @@ import com.yangbin.util.SpUtils;
 
 import java.util.List;
 
-
+/**
+ * 区域筛选--适配器  三级联动  父类
+ */
 public class AreaParentAdapter extends RecyclerView.Adapter{
 
     private Context mContext;

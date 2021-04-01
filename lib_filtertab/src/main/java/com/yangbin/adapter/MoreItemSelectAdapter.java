@@ -17,14 +17,13 @@ import com.yangbin.util.SpUtils;
 import java.util.List;
 
 
-public class ItemSelectAdapter2 extends RecyclerView.Adapter {
+public class MoreItemSelectAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
     private List<BaseFilterBean> mList;
     private boolean isCanMulSelect;
-    private OnItemClickListener onItemClickListener;
 
-    public ItemSelectAdapter2(Context context, List<BaseFilterBean> list, boolean isCanMulSelect) {
+    public MoreItemSelectAdapter(Context context, List<BaseFilterBean> list, boolean isCanMulSelect) {
         mContext = context;
         mList = list;
         this.isCanMulSelect = isCanMulSelect;
@@ -44,7 +43,7 @@ public class ItemSelectAdapter2 extends RecyclerView.Adapter {
             ViewHolder viewHolder = (ViewHolder) holder;
             viewHolder.btn_content.setText(bean.getItemName());
 
-//             是否设置“不限”为选中
+            // 是否设置“不限”为选中
 //            boolean isSelectFirst = true;
 //            for (int i = 0; i < mList.size(); i++) {
 //                BaseFilterBean entity = mList.get(i);
@@ -95,25 +94,19 @@ public class ItemSelectAdapter2 extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     if (isCanMulSelect) {
-                        if (position == 0) {
-                            // 不限
-                            for (int i = 0; i < mList.size(); i++) {
-                                if (i == 0) {
-                                    mList.get(i).setSelecteStatus(1);
-                                } else {
-                                    mList.get(i).setSelecteStatus(0);
-                                }
-                            }
+//                        if (position == 0) {
+//                            // 不限
+//                            for (int i = 0; i < mList.size(); i++) {
+//                               mList.get(i).setSelecteStatus(0);
+//                            }
+//                        } else {
+//                            mList.get(0).setSelecteStatus(0);
+                        if (mList.get(position).getSelecteStatus() == 0) {
+                            mList.get(position).setSelecteStatus(1);
                         } else {
-                            mList.get(0).setSelecteStatus(0);
-                            if (mList.get(position).getSelecteStatus() == 0) {
-                                mList.get(position).setSelecteStatus(1);
-                            } else {
-                                mList.get(position).setSelecteStatus(0);
-                            }
+                            mList.get(position).setSelecteStatus(0);
                         }
-
-
+//                        }
                     } else {
                         for (int i = 0; i < mList.size(); i++) {
                             if (i == position) {
@@ -128,7 +121,6 @@ public class ItemSelectAdapter2 extends RecyclerView.Adapter {
                         }
                     }
                     notifyDataSetChanged();
-                    onItemClickListener.onItemClick(position);
                 }
             });
         } catch (Exception e) {
@@ -152,24 +144,5 @@ public class ItemSelectAdapter2 extends RecyclerView.Adapter {
 
 
         }
-    }
-
-
-    public void resetAll(List<BaseFilterBean> list) {
-        if (list != null) {
-            for (int i = 0; i < list.size(); i++) {
-                list.get(i).setSelecteStatus(0);
-            }
-            notifyDataSetChanged();
-        }
-    }
-
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(int position);
     }
 }

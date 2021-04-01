@@ -113,13 +113,13 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
         init(context, null);
     }
 
-    public FilterTabView(Context context,   AttributeSet attrs) {
+    public FilterTabView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
         init(context, attrs);
     }
 
-    public FilterTabView(Context context,   AttributeSet attrs, int defStyleAttr) {
+    public FilterTabView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         init(context, attrs);
@@ -182,7 +182,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
      * @param filterType
      * @return
      */
-    public FilterTabView addFilterItem(String tabName, final List<BaseFilterBean> data, final int filterType, int popupIndex,boolean isPic) {
+    public FilterTabView addFilterItem(String tabName, final List<BaseFilterBean> data, final int filterType, int popupIndex, boolean isPic) {
         View tabView = inflate(getContext(), R.layout.item_tab_filter, null);
         final TextView tv_tab_name = tabView.findViewById(R.id.tv_tab_name);
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
@@ -232,7 +232,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
         //对筛选项控件进行设置
         String tabSelectName = setFilterTabName(filterType, data, tabName);
         if (TextUtils.isEmpty(tabSelectName)) {
-            if (isPic ) {
+            if (isPic) {
                 tv_tab_name.setBackgroundDrawable(getResources().getDrawable(R.drawable.icon_commercial_real_sort_normal));
             } else {
                 tv_tab_name.setText(tabName);
@@ -271,7 +271,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
             int size = list.size();
             // 单行只有一个层级的点击
             if (filterType == FilterTabConfig.FILTER_TYPE_SINGLE_SELECT
-                    ||filterType == FilterTabConfig.FILTER_TYPE_SINGLE_SELECT_HAVA_PIC
+                    || filterType == FilterTabConfig.FILTER_TYPE_SINGLE_SELECT_HAVA_PIC
                     || filterType == FilterTabConfig.FILTER_TYPE_PRICE_UPRIGHT) {
 
                 for (int i = 0; i < size; i++) {
@@ -331,7 +331,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
                 }
 
                 // 多分类选择
-            } else if (filterType == FilterTabConfig.FILTER_TYPE_MUL_SELECT ||filterType == FilterTabConfig.FILTER_TYPE_PRICE_HORIZONTAL) {
+            } else if (filterType == FilterTabConfig.FILTER_TYPE_MUL_SELECT || filterType == FilterTabConfig.FILTER_TYPE_PRICE_HORIZONTAL) {
                 int count = 0;
                 for (int i = 0; i < size; i++) {
                     BaseFilterBean parentBean = list.get(i);
@@ -437,8 +437,8 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
                 mPopupWs.get(currentIndex).dismiss();
             } else {
 
-                if (((Activity)mContext)!=null && !((Activity)mContext).isFinishing()  ) {
-                    Log.e("=========","崩溃了");
+                if (((Activity) mContext) != null && !((Activity) mContext).isFinishing()) {
+                    Log.e("=========", "崩溃了");
                     mPopupWs.get(currentIndex).show(this);
                 }
             }
@@ -448,7 +448,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
     public void resetSelectData(int currentIndex, int filterType) {
         List<BaseFilterBean> datas = mDataList.get(currentIndex);
 
-        if (FilterTabConfig.FILTER_TYPE_MUL_SELECT == filterType||FilterTabConfig.FILTER_TYPE_PRICE_HORIZONTAL == filterType) {
+        if (FilterTabConfig.FILTER_TYPE_MUL_SELECT == filterType || FilterTabConfig.FILTER_TYPE_PRICE_HORIZONTAL == filterType) {
             FilterResultBean bean = (FilterResultBean) mHasSelected.get(currentIndex);
             if (bean != null) {
                 List<FilterResultBean.MulTypeBean> hasSelectList = bean.getSelectList();
@@ -553,7 +553,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
                 } else {
 //                    mTextViewLists.get(popupIndex).setText(itemName);
 //                    mTextViewLists.get(popupIndex).setTextColor(getResources().getColor(R.color.color_ff8800));
-                    mTextViewLists.get(popupIndex).setBackgroundDrawable(getResources().getDrawable(R.drawable.icon_commercial_real_pass ));
+                    mTextViewLists.get(popupIndex).setBackgroundDrawable(getResources().getDrawable(R.drawable.icon_commercial_real_pass));
                 }
             } else {
                 // itemId = 0 即为点击“不限” FilterTabView名称不变
@@ -567,7 +567,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
             // 区域选择
         }
         // 单行只有一个层级的点击
-        else    if (resultBean.getPopupType() == FilterTabConfig.FILTER_TYPE_SINGLE_SELECT
+        else if (resultBean.getPopupType() == FilterTabConfig.FILTER_TYPE_SINGLE_SELECT
                 || resultBean.getPopupType() == FilterTabConfig.FILTER_TYPE_PRICE_UPRIGHT
                 || resultBean.getPopupType() == FilterTabConfig.FILTER_TYPE_SINGLE_GIRD) {
 
@@ -602,7 +602,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
             onSelectResultListener.onSelectResult(resultBean, postion);
 
             // 多分类选择
-        } else if (resultBean.getPopupType() == FilterTabConfig.FILTER_TYPE_MUL_SELECT ) {
+        } else if (resultBean.getPopupType() == FilterTabConfig.FILTER_TYPE_MUL_SELECT) {
             // 选择的集合
             List<FilterResultBean.MulTypeBean> selectList = resultBean.getSelectList();
             if (selectList.size() == 0) {
@@ -642,11 +642,11 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
                 }
             }
 
-            List<FilterResultBean> selectList = resultBeans ;
-            if(selectList.size()==1){
+            List<FilterResultBean> selectList = resultBeans;
+            if (selectList.size() == 1) {
                 mTextViewLists.get(popupIndex).setText(itemName);
                 mTextViewLists.get(popupIndex).setTextColor(getResources().getColor(R.color.color_ff8800));
-            }else {
+            } else {
                 mTextViewLists.get(popupIndex).setText(mTextContents.get(popupIndex) + "(" + selectList.size() + ")");
                 mTextViewLists.get(popupIndex).setTextColor(getResources().getColor(R.color.color_ff8800));
             }

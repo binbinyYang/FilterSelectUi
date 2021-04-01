@@ -16,7 +16,9 @@ import com.yangbin.util.SpUtils;
 
 import java.util.List;
 
-
+/**
+ * 网格--适配器
+ */
 public class ItemSelectAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
@@ -43,19 +45,19 @@ public class ItemSelectAdapter extends RecyclerView.Adapter {
             ViewHolder viewHolder = (ViewHolder) holder;
             viewHolder.btn_content.setText(bean.getItemName());
 
-            // 是否设置“不限”为选中
-//            boolean isSelectFirst = true;
-//            for (int i = 0; i < mList.size(); i++) {
-//                BaseFilterBean entity = mList.get(i);
-//                if (entity.getSelecteStatus() == 1) {
-//                    isSelectFirst = false;
-//                    break;
-//                }
-//            }
-//
-//            if (isSelectFirst) {
-//                mList.get(0).setSelecteStatus(1);
-//            }
+//             是否设置“不限”为选中
+            boolean isSelectFirst = true;
+            for (int i = 0; i < mList.size(); i++) {
+                BaseFilterBean entity = mList.get(i);
+                if (entity.getSelecteStatus() == 1) {
+                    isSelectFirst = false;
+                    break;
+                }
+            }
+
+            if (isSelectFirst) {
+                mList.get(0).setSelecteStatus(1);
+            }
 
             if (bean.getSelecteStatus() == 0) {
 
@@ -94,19 +96,19 @@ public class ItemSelectAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     if (isCanMulSelect) {
-//                        if (position == 0) {
-//                            // 不限
-//                            for (int i = 0; i < mList.size(); i++) {
-//                               mList.get(i).setSelecteStatus(0);
-//                            }
-//                        } else {
-//                            mList.get(0).setSelecteStatus(0);
-                        if (mList.get(position).getSelecteStatus() == 0) {
-                            mList.get(position).setSelecteStatus(1);
+                        if (position == 0) {
+                            // 不限
+                            for (int i = 0; i < mList.size(); i++) {
+                                mList.get(i).setSelecteStatus(0);
+                            }
                         } else {
-                            mList.get(position).setSelecteStatus(0);
+                            mList.get(0).setSelecteStatus(0);
+                            if (mList.get(position).getSelecteStatus() == 0) {
+                                mList.get(position).setSelecteStatus(1);
+                            } else {
+                                mList.get(position).setSelecteStatus(0);
+                            }
                         }
-//                        }
                     } else {
                         for (int i = 0; i < mList.size(); i++) {
                             if (i == position) {

@@ -19,9 +19,6 @@ import java.util.List;
 
 public class PopupEntityLoaderImp implements IPopupLoader {
 
-
-
-
     @Override
     public PopupWindow getPopupEntity(Context context, List data, int filterType, int position, OnFilterToViewListener onFilterToViewListener, FilterTabView view) {
 

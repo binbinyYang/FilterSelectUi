@@ -3,7 +3,6 @@ package com.yangbin.view;
 import android.content.Context;
 import android.widget.PopupWindow;
 
-
 import com.yangbin.listener.OnFilterToViewListener;
 
 import java.util.List;
