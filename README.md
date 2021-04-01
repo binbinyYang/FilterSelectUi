@@ -3,10 +3,8 @@
 房产类APP条件筛选框，包含区域（单选，多选），竖着排列（单选，多选），横向排列（单选，多选）
 -------  
 
-![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/1.gif)
-![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/2.gif)
-![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/3.gif)
-![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/4.gif)
+![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/1.gif) ![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/2.gif)
+![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/3.gif) ![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/4.gif)
 ![演示图1](https://github.com/binbinyYang/FilterSelectUi/blob/master/5.gif)
  
 
